@@ -11,6 +11,7 @@ import {
 import React, { useState, useEffect } from "react";
 import RadioButton from "../RadioButton/RadioButton";
 import * as ImagePicker from 'expo-image-picker'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Step2({ navigation }) {
   const [address, setAddress] = useState("");
@@ -66,7 +67,15 @@ export default function Step2({ navigation }) {
     }
   };
 
-  const id = localStorage.getItem("shopid")
+  const [id,setId]=useState("")
+  useEffect(()=>{
+    getid();
+  },[])
+  const getid=async()=>{
+    setId(await AsyncStorage.getItem("shopid"))
+  }
+
+  console.log(id)
 
   const next = async () => {
 
@@ -84,7 +93,7 @@ export default function Step2({ navigation }) {
       ];
     }
 
-    const apiUrl = `http://localhost:3001/${id}/reshopsignup`;
+    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/reshopsignup`;
 
     const postData = {
       "address": address,
@@ -108,7 +117,7 @@ export default function Step2({ navigation }) {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      navigation.navigate("ShopAdminLogin")
+      navigation.navigate("ShopLogin")
 
     } catch (error) {
       console.error('Fetch error:', error);
@@ -119,7 +128,7 @@ export default function Step2({ navigation }) {
     <ScrollView style={{ height: 500 }}>
       <View >
         <View>
-          <Text style={styles.textSmall}>Address:</Text>
+          <Text style={styles.textSmall}>Address: ${id}</Text>
           <TextInput
             placeholder="Enter your address"
             value={address}

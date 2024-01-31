@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import RadioButton from "../RadioButton/RadioButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Religious = ({ navigation }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -19,25 +20,24 @@ const Religious = ({ navigation }) => {
     { label: "kosher", value: "kosher" },
   ];
 
-  const id = localStorage.getItem("id")
+  const [id, setId] = useState("");
+  useEffect(()=>{
+    getid();
+  },[])
+  const getid=async()=>{
+    setId(await AsyncStorage.getItem("id"))
+  }
 
   const next = async () => {
+    let newArray = [];
 
-    let newArray=[]
-
-    if(other){
-      newArray = [
-        ...selectedOptions.map((item) => item.value),
-        other,
-      ];
-    }
-    else{
-      newArray = [
-        ...selectedOptions.map((item) => item.value)
-      ];
+    if (other) {
+      newArray = [...selectedOptions.map((item) => item.value), other];
+    } else {
+      newArray = [...selectedOptions.map((item) => item.value)];
     }
 
-    const apiUrl = `http://localhost:3001/${id}/resignup`;
+    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       religion: newArray,
@@ -45,22 +45,21 @@ const Religious = ({ navigation }) => {
 
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      navigation.navigate("Allergies")
-
+      navigation.navigate("Allergies");
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -89,10 +88,7 @@ const Religious = ({ navigation }) => {
               />
             </View>
             <View style={{ flexDirection: "row", marginTop: 20 }}>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={next}
-              >
+              <TouchableOpacity style={styles.btn} onPress={next}>
                 <Text style={styles.btnText}>Next</Text>
               </TouchableOpacity>
               <TouchableOpacity

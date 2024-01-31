@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const login = async () => {
-    const apiUrl = "http://192.168.137.228:3001/login";
+    const apiUrl = "https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/login";
 
     const postData = {
       email: email,
@@ -36,7 +37,7 @@ export default function Login({ navigation }) {
 
       console.log("Data received:", data);
       if (data.status === "userFound") {
-        localStorage.setItem("id", data.id);
+        await AsyncStorage.setItem("id", (data.id));
         navigation.navigate("BasicInfo");
       } else {
         navigation.navigate("Login");

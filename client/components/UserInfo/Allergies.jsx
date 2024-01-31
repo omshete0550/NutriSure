@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import RadioButton from "../RadioButton/RadioButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Allergies = ({ navigation }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -20,25 +21,24 @@ const Allergies = ({ navigation }) => {
     { label: "Soy", value: "Soy" },
   ];
 
-  const id = localStorage.getItem("id")
+  const [id, setId] = useState("");
+  useEffect(()=>{
+    getid();
+  },[])
+  const getid=async()=>{
+    setId(await AsyncStorage.getItem("id"))
+  }
 
   const next = async () => {
-
-    let newArray = []
+    let newArray = [];
 
     if (other) {
-      newArray = [
-        ...selectedOptions.map((item) => item.value),
-        other,
-      ];
-    }
-    else {
-      newArray = [
-        ...selectedOptions.map((item) => item.value)
-      ];
+      newArray = [...selectedOptions.map((item) => item.value), other];
+    } else {
+      newArray = [...selectedOptions.map((item) => item.value)];
     }
 
-    const apiUrl = `http://localhost:3001/${id}/resignup`;
+    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       allergy: newArray,
@@ -46,24 +46,21 @@ const Allergies = ({ navigation }) => {
 
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      navigation.navigate("Severity")
-
+      navigation.navigate("Severity");
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
     }
-  }
-
-
+  };
 
   return (
     <View style={styles.container}>
@@ -72,9 +69,7 @@ const Allergies = ({ navigation }) => {
       </View>
       <View style={{ flex: 1, marginTop: 10, alignItems: "center" }}>
         <View>
-          <Text style={styles.text}>
-            Are you allergic to ?
-          </Text>
+          <Text style={styles.text}>Are you allergic to ?</Text>
 
           <View style={styles.radiocontainer}>
             <RadioButton
@@ -92,10 +87,7 @@ const Allergies = ({ navigation }) => {
               />
             </View>
             <View style={{ flexDirection: "row", marginTop: 20 }}>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={next}
-              >
+              <TouchableOpacity style={styles.btn} onPress={next}>
                 <Text style={styles.btnText}>Next</Text>
               </TouchableOpacity>
               <TouchableOpacity

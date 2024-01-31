@@ -15,7 +15,7 @@ export default function Register({ navigation }) {
       alert("Check Password")
     }
     else {
-      const apiUrl = 'http://localhost:3001/signup';
+      const apiUrl = 'https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/signup';
 
       const postData = {
         fname: fname,

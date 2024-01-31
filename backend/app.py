@@ -203,9 +203,10 @@ def shopsignup():
     gstin=body.get('gstin')
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+    print(1)
 
     try:
-        db['shops'].create_index([('gstin', pymongo.ASCENDING)], unique=True)
+        db['shops'].create_index([('phone', pymongo.ASCENDING)], unique=True)
         result = db['shops'].insert_one({
             "shopname": shopname,
             "ownername": ownername,
@@ -220,7 +221,10 @@ def shopsignup():
             "blueprint": blueprint,
             "gstin": gstin,
         })
+        print(result)
         inserted_id = str(result.inserted_id)
+        print(inserted_id)
+        
         return jsonify({
             'status':'Success',
             'inserted_id' : inserted_id

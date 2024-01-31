@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import RadioButton from "../RadioButton/RadioButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Severity = ({ navigation }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -20,37 +21,41 @@ const Severity = ({ navigation }) => {
     { label: "High", value: "High" },
   ];
 
-  const id = localStorage.getItem("id")
+  const [id, setId] = useState("");
+  useEffect(()=>{
+    getid();
+  },[])
+  const getid=async()=>{
+    setId(await AsyncStorage.getItem("id"))
+  }
 
   const next = async () => {
-
     const newArray = selectedOptions[0].value;
 
-    const apiUrl = `http://localhost:3001/${id}/resignup`;
+    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       severity: newArray,
-      fav_cuisine:favFood
+      fav_cuisine: favFood,
     };
 
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      navigation.navigate("HomePage")
-
+      navigation.navigate("HomePage");
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -89,10 +94,7 @@ const Severity = ({ navigation }) => {
               </View>
             </View>
             <View style={{ flexDirection: "row", marginTop: 20 }}>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={next}
-              >
+              <TouchableOpacity style={styles.btn} onPress={next}>
                 <Text style={styles.btnText}>Submit</Text>
               </TouchableOpacity>
               <TouchableOpacity

@@ -108,8 +108,7 @@ const styles = StyleSheet.create({
   },
   postInput: {
     flex: 1,
-    minHeight: 40,
-    maxHeight: 150,
+    height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 10,

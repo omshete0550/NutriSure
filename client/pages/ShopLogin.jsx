@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ShopLogin({ navigation }) {
 
@@ -14,7 +15,7 @@ export default function ShopLogin({ navigation }) {
 
     const login = async () => {
 
-        const apiUrl = 'http://localhost:3001/shoplogin';
+        const apiUrl = 'https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/shoplogin';
 
         const postData = {
             email: email,
@@ -37,11 +38,11 @@ export default function ShopLogin({ navigation }) {
 
             console.log('Data received:', data);
             if (data.status === "shopFound") {
-                localStorage.setItem("id", data.id)
-                navigation.navigate('ShopLogin');
+                await AsyncStorage.setItem("shopid", (data.id));
+                navigation.navigate('ShopLogin');//shopkeeper upload the photo of product
             }
             else {
-                navigation.navigate('Login');
+                navigation.navigate('ShopLogin');
             }
         } catch (error) {
             console.error('Fetch error:', error);
