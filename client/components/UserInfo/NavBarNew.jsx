@@ -9,7 +9,7 @@ const NavBarNew = () => {
     { name: 'home', label: 'Home', screen: 'BasicInfo' },
     { name: 'chatbubble-ellipses', label: 'Community', screen: 'CommunityScreen' },
     { name: 'person-circle', label: 'Profile', screen: 'ProfileScreen' },
-    { name: 'restaurant', label: 'Recipe', screen: 'RecipeScreen' },
+    { name: 'restaurant', label: 'Recipe', screen: 'Receipe' },
   ];
   const animatedValues = icons.map(() => new Animated.Value(0));
 
