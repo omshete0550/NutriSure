@@ -15,6 +15,7 @@ import Step2 from "./components/Shop/Step2";
 import SingleShopPage from "./pages/SingleShopPage";
 import AddToCart from "./pages/AddToCart";
 import Payment from "./pages/Payment";
+import SingleProductPage from "./pages/SingleProductPage";
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
         <Stack.Screen name="SingleShopPage" component={SingleShopPage} options={{headerShown: false}} />
         <Stack.Screen name="AddToCart" component={AddToCart} options={{headerShown: false}} />
         <Stack.Screen name="payment" component={Payment} options={{headerShown: false}} />
+        <Stack.Screen name="SingleProductPage" component={SingleProductPage} options={{headerShown: false}} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
