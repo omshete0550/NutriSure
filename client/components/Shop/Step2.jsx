@@ -5,16 +5,19 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
+  Button,
+  Image,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RadioButton from "../RadioButton/RadioButton";
+import * as ImagePicker from 'expo-image-picker'
 
 export default function Step2({ navigation }) {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [timing, setTiming] = useState("");
-  const [certificate, setCertificate] = useState("");
-  const [blueprint, setBlueprint] = useState("");
+  // const [certificate, setCertificate] = useState("");
+  // const [blueprint, setBlueprint] = useState("");
   const [gstin, setGstin] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [other, setOther] = useState("");
@@ -27,6 +30,41 @@ export default function Step2({ navigation }) {
     { label: "Fruits", value: "Fruits" }
   ];
 
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
+  const [blueprint, setblueprint] = useState(null);
+
+  const pickBlueprint = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   const id = localStorage.getItem("shopid")
 
@@ -51,7 +89,7 @@ export default function Step2({ navigation }) {
     const postData = {
       "address": address,
       "city": city,
-      "certification": certificate,
+      "certification": image,
       "blueprint": blueprint,
       "timing": timing,
       "categories": newArray,
@@ -98,16 +136,21 @@ export default function Step2({ navigation }) {
             style={styles.textInput}
           />
         </View>
-        <View>
+        {/* <View>
           <Text style={styles.textSmall}>Certificate:</Text>
           <TextInput
-            placeholder="Enter your Certificate"
-            value={certificate}
-            onChangeText={(text) => setCertificate(text)}
-            style={styles.textInput}
+          placeholder="Enter your Certificate"
+          value={certificate}
+          onChangeText={(text) => setCertificate(text)}
+          style={styles.textInput}
           />
+        </View> */}
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={styles.textSmall}>Certificate:</Text>
+          <Button title="Pick an image from camera roll" onPress={pickImage} />
+          {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
         </View>
-        <View>
+        {/* <View>
           <Text style={styles.textSmall}>Blueprint:</Text>
           <TextInput
             placeholder="Enter your Blueprint"
@@ -115,6 +158,11 @@ export default function Step2({ navigation }) {
             value={blueprint}
             onChangeText={(text) => setBlueprint(text)}
           />
+        </View> */}
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={styles.textSmall}>Blueprint:</Text>
+          <Button title="Pick an image from camera roll" onPress={pickBlueprint} />
+          {blueprint && <Image source={{ uri: blueprint }} style={{ width: 200, height: 200 }} />}
         </View>
         <View>
           <Text style={styles.textSmall}>Timing:</Text>
