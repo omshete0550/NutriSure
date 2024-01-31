@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet, Text, View } from 'react-native';
 import BasicInfo from "./components/UserInfo/BasicInfo";
 import dietaryRestrictions from "./components/UserInfo/dietaryRestrictions";
 import dietaryPreferences from "./components/UserInfo/dietaryPreferences";
@@ -14,11 +13,13 @@ import ShopAdminLogin from "./pages/ShopAdminLogin";
 import Step1 from "./components/Shop/Step1";
 import Step2 from "./components/Shop/Step2";
 import SingleShopPage from "./pages/SingleShopPage";
+import AddToCart from "./pages/AddToCart";
+import Payment from "./pages/Payment";
 const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ShopAdminLogin" >
+      <Stack.Navigator initialRouteName="SingleShopPage" >
         <Stack.Screen name="ShopAdminLogin" component={ShopAdminLogin} options={{ headerShown: false }} />
         <Stack.Screen name="Step1" component={Step1} options={{ headerShown: false }} />
         <Stack.Screen name="Step2" component={Step2} options={{ headerShown: false }} />
@@ -31,17 +32,10 @@ export default function App() {
         <Stack.Screen name="Sign Up" component={Register} options={{headerShown: false}} />
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
         <Stack.Screen name="SingleShopPage" component={SingleShopPage} options={{headerShown: false}} />
+        <Stack.Screen name="AddToCart" component={AddToCart} options={{headerShown: false}} />
+        <Stack.Screen name="payment" component={Payment} options={{headerShown: false}} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
