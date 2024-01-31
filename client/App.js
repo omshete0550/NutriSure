@@ -15,14 +15,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="BasicInfo">
-        <Stack.Screen name="BasicInfo" component={BasicInfo} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Sign Up" component={Register} />
+        {/* <Stack.Screen name="BasicInfo" component={BasicInfo} />
         <Stack.Screen name="dietaryRestrictions" component={dietaryRestrictions} />
         <Stack.Screen name="dietaryPreferences" component={dietaryPreferences} />
         <Stack.Screen name="Religious" component={Religious} />
         <Stack.Screen name="Allergies" component={Allergies} />
-        <Stack.Screen name="Severity" component={Severity} />
-        {/* <Stack.Screen name="Sign Up" component={Register} />
-        <Stack.Screen name="Login" component={Login} /> */}
+        <Stack.Screen name="Severity" component={Severity} /> */}
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
