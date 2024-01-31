@@ -18,6 +18,8 @@ import Payment from "./pages/Payment";
 import SingleProductPage from "./pages/SingleProductPage";
 import Homepage from "./pages/Homepage";
 import ShopLogin from "./pages/ShopLogin";
+import Receipe from "./pages/Receipe";
+import ReceipeFinal from "./pages/ReceipeFinal";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -41,6 +43,8 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="SingleShopPage" component={SingleShopPage} options={{ headerShown: false }} />
         <Stack.Screen name="HomePage" component={Homepage} options={{ headerShown: false }} />
+        <Stack.Screen name="Receipe" component={Receipe} options={{ headerShown: false }} />
+        <Stack.Screen name="ReceipeFinal" component={ReceipeFinal} options={{ headerShown: false }} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

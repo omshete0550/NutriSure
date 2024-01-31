@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import RadioButton from "../RadioButton/RadioButton";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Allergies = ({ navigation }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -20,9 +21,9 @@ const Allergies = ({ navigation }) => {
     { label: "Soy", value: "Soy" },
   ];
 
-  const id = localStorage.getItem("id")
-
+  
   const next = async () => {
+    const id = await AsyncStorage.getItem("id");
 
     let newArray = []
 

@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Step1({ }) {
   const navigation = useNavigation();
@@ -50,7 +51,7 @@ export default function Step1({ }) {
         console.log('Data received:', data);
         if (data.status === "Success") {
           navigation.navigate("Step2")
-          localStorage.setItem("shopid",data.inserted_id)
+          await AsyncStorage.setItem("shopid", data.inserted_id.toString());
         }
         else {
           navigation.navigate('Register');
@@ -64,7 +65,7 @@ export default function Step1({ }) {
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>ShopKeeper Sign Up</Text>
+      <Text style={{ fontSize: "1.25rem", fontWeight: "600" }}>ShopKeeper Sign Up</Text>
       <View>
         <Text style={styles.textSmall}>Shop Name:</Text>
         <TextInput

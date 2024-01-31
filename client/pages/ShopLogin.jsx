@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ShopLogin({ navigation }) {
 
@@ -37,7 +38,7 @@ export default function ShopLogin({ navigation }) {
 
             console.log('Data received:', data);
             if (data.status === "shopFound") {
-                localStorage.setItem("id", data.id)
+                await AsyncStorage.setItem("shopid", data.id.toString());
                 navigation.navigate('ShopLogin');
             }
             else {
@@ -51,14 +52,8 @@ export default function ShopLogin({ navigation }) {
 
     return (
         <View style={{ flex: 1, alignItems: "center" }}>
-            <br></br>
-            <br></br>
-            <br></br>
-            <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>ShopKeeper Login</Text>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+
+            <Text style={{ fontSize: "1.25rem", fontWeight: "600" }}>ShopKeeper Login</Text>
 
             <View>
                 <Text style={styles.textSmall}>Email:</Text>

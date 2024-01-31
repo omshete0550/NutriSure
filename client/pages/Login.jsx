@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
   
@@ -37,7 +38,7 @@ export default function Login({ navigation }) {
 
       console.log('Data received:', data);
       if (data.status === "userFound") {
-        localStorage.setItem("id",data.id)
+        await AsyncStorage.setItem("id", data.id.toString());
         navigation.navigate('BasicInfo');
       }
       else {
@@ -77,7 +78,6 @@ export default function Login({ navigation }) {
       <TouchableOpacity style={styles.btn} onPress={login}>
         <Text style={styles.btnText}>Sign In</Text>
       </TouchableOpacity>
-      <br></br>
       <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate('Sign Up')}}>
         <Text style={styles.btnText}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
