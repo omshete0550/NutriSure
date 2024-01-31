@@ -7,7 +7,8 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 
-export default function Login() {
+export default function Login({ navigation }) {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,9 +36,9 @@ export default function Login() {
       const data = await response.json();
 
       console.log('Data received:', data);
-      if (data.status === "Success") {
-        // navigation.navigate('BasicInfo');
-        alert("Login Successful")
+      if (data.status === "userFound") {
+        localStorage.setItem("id",data.id)
+        navigation.navigate('BasicInfo');
       }
       else {
         navigation.navigate('Login');
@@ -67,11 +68,15 @@ export default function Login() {
           value={password}
           onChangeText={(text) => setPassword(text)}
           style={styles.textInput}
+          secureTextEntry
         />
       </View>
 
       <TouchableOpacity style={styles.btn} onPress={login}>
         <Text style={styles.btnText}>Sign In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate('Sign Up')}}>
+        <Text style={styles.btnText}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
     </View>
   );

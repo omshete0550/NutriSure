@@ -20,15 +20,60 @@ const Allergies = ({ navigation }) => {
     { label: "Soy", value: "Soy" },
   ];
 
+  const id = localStorage.getItem("id")
+
+  const next = async () => {
+
+    let newArray = []
+
+    if (other) {
+      newArray = [
+        ...selectedOptions.map((item) => item.value),
+        other,
+      ];
+    }
+    else {
+      newArray = [
+        ...selectedOptions.map((item) => item.value)
+      ];
+    }
+
+    const apiUrl = `http://localhost:3001/${id}/resignup`;
+
+    const postData = {
+      allergy: newArray,
+    };
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      navigation.navigate("Severity")
+
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
+
+
+
   return (
     <View style={styles.container}>
       <View style={styles.progreeBar}>
-        <ProgressBar progress={0.835} width={325} />
+        <ProgressBar progress={0.835} width={375} />
       </View>
       <View style={{ flex: 1, marginTop: 10, alignItems: "center" }}>
         <View>
           <Text style={styles.text}>
-            Do you have any dietary restrictions or allergies?
+            Are you allergic to ?
           </Text>
 
           <View style={styles.radiocontainer}>
@@ -49,7 +94,7 @@ const Allergies = ({ navigation }) => {
             <View style={{ flexDirection: "row", marginTop: 20 }}>
               <TouchableOpacity
                 style={styles.btn}
-                onPress={() => navigation.navigate("Severity")}
+                onPress={next}
               >
                 <Text style={styles.btnText}>Next</Text>
               </TouchableOpacity>
@@ -76,17 +121,18 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   textSmall: {
-    fontSize: 16,
+    fontSize: 18,
+    marginTop: 30,
     fontWeight: 600,
-    paddingHorizontal: 20,
   },
   text: {
     fontSize: 16,
     fontWeight: 600,
-    padding: 20,
+    marginTop: 50,
+    paddingHorizontal: 20,
   },
   progreeBar: {
-    marginTop: 20,
+    marginTop: 50,
     padding: 20,
   },
   titleCont: {
@@ -97,17 +143,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textInput: {
-    borderWidth: 1,
-    borderColor: "#3f3f3f",
-    padding: 10,
-    margin: 10,
-    width: 300,
+    borderWidth: 0.5,
+    borderColor: "#d3d3d3",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    fontSize: 18,
+    marginTop: 20,
+    width: 375,
     borderRadius: 10,
+    shadowOffset: { width: -3, height: 4 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    marginBottom: 30,
   },
   btn: {
     backgroundColor: "#0484ac",
-    paddingHorizontal: 50,
-    paddingVertical: 8,
+    paddingHorizontal: 70,
+    paddingVertical: 12,
     borderRadius: 5,
     marginRight: 10,
   },

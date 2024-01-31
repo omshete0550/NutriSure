@@ -20,10 +20,42 @@ const Severity = ({ navigation }) => {
     { label: "High", value: "High" },
   ];
 
+  const id = localStorage.getItem("id")
+
+  const next = async () => {
+
+    const newArray = selectedOptions[0].value;
+
+    const apiUrl = `http://localhost:3001/${id}/resignup`;
+
+    const postData = {
+      severity: newArray,
+      fav_cuisine:favFood
+    };
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      navigation.navigate("HomePage")
+
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.progreeBar}>
-        <ProgressBar progress={1} width={325} />
+        <ProgressBar progress={1} width={375} />
       </View>
       <View style={{ flex: 1, marginTop: 10, alignItems: "center" }}>
         <View>
@@ -36,7 +68,7 @@ const Severity = ({ navigation }) => {
               onSelect={(options) => setSelectedOptions(options)} // Update to pass the array
             />
 
-            <View style={{marginTop: 20}} >
+            <View style={{ marginTop: 20 }}>
               <Text style={styles.textSmall}>Other:</Text>
               <TextInput
                 placeholder="Please specify...."
@@ -46,7 +78,7 @@ const Severity = ({ navigation }) => {
               />
             </View>
             <View>
-              <View style={{marginTop: 50}}>
+              <View style={{ marginTop: 50 }}>
                 <Text style={styles.textSmall}>Favourite Food:</Text>
                 <TextInput
                   placeholder="Enter your favorite food"
@@ -59,9 +91,9 @@ const Severity = ({ navigation }) => {
             <View style={{ flexDirection: "row", marginTop: 20 }}>
               <TouchableOpacity
                 style={styles.btn}
-                onPress={() => navigation.navigate("Allergies")}
+                onPress={next}
               >
-                <Text style={styles.btnText}>Next</Text>
+                <Text style={styles.btnText}>Submit</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.btn}
@@ -83,19 +115,21 @@ const styles = StyleSheet.create({
   },
   radiocontainer: {
     flex: 1,
+    padding: 20,
   },
   textSmall: {
-    fontSize: 16,
+    fontSize: 18,
+    marginTop: 30,
     fontWeight: 600,
-    paddingHorizontal: 20,
   },
   text: {
     fontSize: 16,
     fontWeight: 600,
-    padding: 20,
+    marginTop: 50,
+    paddingHorizontal: 20,
   },
   progreeBar: {
-    marginTop: 20,
+    marginTop: 50,
     padding: 20,
   },
   titleCont: {
@@ -106,17 +140,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textInput: {
-    borderWidth: 1,
-    borderColor: "#3f3f3f",
-    padding: 10,
-    margin: 10,
-    width: 300,
+    borderWidth: 0.5,
+    borderColor: "#d3d3d3",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    fontSize: 18,
+    marginTop: 20,
+    width: 375,
     borderRadius: 10,
+    shadowOffset: { width: -3, height: 4 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    marginBottom: 30,
   },
   btn: {
     backgroundColor: "#0484ac",
-    paddingHorizontal: 50,
-    paddingVertical: 8,
+    paddingHorizontal: 70,
+    paddingVertical: 12,
     borderRadius: 5,
     marginRight: 10,
   },

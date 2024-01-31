@@ -118,27 +118,64 @@ def resignup(id):
 
     print(age)
     try:
-        db['user'].update_one(
+        if(age):
+            db['user'].update_one(
                 {'_id': ObjectId(id)},
                 {
                     '$set': {
                         "age": age,
                         "gender": gender,
-                        "city": city,
-                        "language": language,
-                        "height": height,
-                        "weight": weight,
-                        "diet_resctriction": diet_resctriction,
-                        "diet_pref": diet_pref,
-                        "religion": religion,
-                        "allergy": allergy,
-                        "severity": severity,
-                        "fav_cuisine": fav_cuisine,
-                        "cooking_skills": cooking_skills,
-                        "notifications": notifications
+                        "city":city
                     }
                 }
             )
+        elif(diet_resctriction):
+            db['user'].update_one(
+                {'_id': ObjectId(id)},
+                {
+                    '$set': {
+                        "diet_resctriction": diet_resctriction
+                    }
+                }
+            )
+        elif(diet_pref):
+            db['user'].update_one(
+                {'_id': ObjectId(id)},
+                {
+                    '$set': {
+                        "diet_pref": diet_pref
+                    }
+                }
+            )
+        elif(religion):
+            db['user'].update_one(
+                {'_id': ObjectId(id)},
+                {
+                    '$set': {
+                        "religion": religion
+                    }
+                }
+            )
+        elif(allergy):
+            db['user'].update_one(
+                {'_id': ObjectId(id)},
+                {
+                    '$set': {
+                        "allergy": allergy
+                    }
+                }
+            )
+        elif(severity):
+            db['user'].update_one(
+                {'_id': ObjectId(id)},
+                {
+                    '$set': {
+                        "severity": severity,
+                        "fav_cuisine": fav_cuisine
+                    }
+                }
+            )
+        
         return jsonify({
             'status':'Success'
         })
