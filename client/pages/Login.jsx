@@ -10,6 +10,44 @@ import React, { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const login = async () => {
+
+    const apiUrl = 'http://localhost:3001/login';
+
+    const postData = {
+      email: email,
+      password: password
+    };
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+
+      console.log('Data received:', data);
+      if (data.status === "Success") {
+        // navigation.navigate('BasicInfo');
+        alert("Login Successful")
+      }
+      else {
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+
+  };
+
   return (
     <View style={{ flex: 1, alignItems: "center" }}>
 
@@ -32,7 +70,7 @@ export default function Login() {
         />
       </View>
 
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={login}>
         <Text style={styles.btnText}>Sign In</Text>
       </TouchableOpacity>
     </View>

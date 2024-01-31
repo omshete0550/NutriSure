@@ -44,38 +44,38 @@ def signup():
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    try:
-        db['user'].create_index([('phone', pymongo.ASCENDING)], unique=True)
-        result = db['user'].insert_one({
-            "fname": fname,
-            "lname": lname,
-            "email": email,
-            "phone": phone,
-            "password": hashed_password,
-            "age": age,
-            "gender": gender,
-            "city": city,
-            "language": language,
-            "height": height,
-            "weight": weight,
-            "diet_resctriction": diet_resctriction,
-            "diet_pref": diet_pref,
-            "religion": religion,
-            "allergy": allergy,
-            "severity": severity,
-            "fav_cuisine": fav_cuisine,
-            "cooking_skills": cooking_skills,
-            "notifications": notifications
-        })
-        inserted_id = str(result.inserted_id)
-        return jsonify({
-            'status':'Success',
-            'inserted_id' : inserted_id
-        })
-    except:
-        return jsonify({
-            'status':'Phone number already registered'
-        })
+    # try:
+    db['user'].create_index([('phone', pymongo.ASCENDING)], unique=True)
+    result = db['user'].insert_one({
+        "fname": fname,
+        "lname": lname,
+        "email": email,
+        "phone": phone,
+        "password": hashed_password,
+        "age": age,
+        "gender": gender,
+        "city": city,
+        "language": language,
+        "height": height,
+        "weight": weight,
+        "diet_resctriction": diet_resctriction,
+        "diet_pref": diet_pref,
+        "religion": religion,
+        "allergy": allergy,
+        "severity": severity,
+        "fav_cuisine": fav_cuisine,
+        "cooking_skills": cooking_skills,
+        "notifications": notifications
+    })
+    inserted_id = str(result.inserted_id)
+    return jsonify({
+        'status':'Success',
+        'inserted_id' : inserted_id
+    })
+    # except:
+    #     return jsonify({
+    #         'status':'Phone number already registered'
+    #     })
 
 #Login - User [Done]
 @app.route("/login",methods=['POST'])

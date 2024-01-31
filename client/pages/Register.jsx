@@ -1,12 +1,59 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 
-export default function Register() {
+export default function Register({ navigation }) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [conPass, setConPass] = useState("");
+
+  const signup = async () => {
+
+    if (conPass !== password) {
+      alert("Check Password")
+    }
+    else {
+      const apiUrl = 'http://localhost:3001/signup';
+
+      const postData = {
+        fname: fname,
+        lname: lname,
+        email: email,
+        phone: phone,
+        password: password
+      };
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(postData)
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        console.log('Data received:', data);
+        if (data.status === "Success") {
+          navigation.navigate('Login');
+        }
+        else {
+          navigation.navigate('Register');
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+    }
+
+  };
+
+
   return (
     <View style={{ flex: 1, alignItems: "center" }}>
       <View>
@@ -34,6 +81,16 @@ export default function Register() {
           value={email}
           onChangeText={(text) => setEmail(text)}
           style={styles.textInput}
+          keyboardType="email-address"
+        />
+      </View>
+      <View>
+        <Text style={styles.textSmall}>Phone:</Text>
+        <TextInput
+          placeholder="Enter your phone number"
+          value={phone}
+          onChangeText={(text) => setPhone(text)}
+          style={styles.textInput}
         />
       </View>
       <View>
@@ -43,6 +100,7 @@ export default function Register() {
           value={password}
           onChangeText={(text) => setPassword(text)}
           style={styles.textInput}
+          secureTextEntry
         />
       </View>
 
@@ -53,10 +111,12 @@ export default function Register() {
           value={conPass}
           onChangeText={(text) => setConPass(text)}
           style={styles.textInput}
+          secureTextEntry
         />
       </View>
       <TouchableOpacity
         style={styles.btn}
+        onPress={signup}
       >
         <Text style={styles.btnText}>Sign Up</Text>
       </TouchableOpacity>
