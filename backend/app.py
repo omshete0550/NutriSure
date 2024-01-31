@@ -147,5 +147,71 @@ def resignup(id):
             'status':'Error occured'
         })
 
+#SignUp - Shop [Done]
+@app.route("/shopsignup",methods=['POST'])
+def shopsignup():
+    body=request.json
+    shopname=body.get('shopname')
+    ownername=body.get('ownername')
+    email=body.get('email')
+    phone=body.get('phone')
+    password=body.get('password')
+    address=body.get('address')
+    city=body.get('city')
+    certification=body.get('certification')
+    timing=body.get('timing')
+    categories=body.get('categories')
+    blueprint=body.get('blueprint')
+    gstin=body.get('gstin')
+
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    try:
+        db['shops'].create_index([('gstin', pymongo.ASCENDING)], unique=True)
+        result = db['shops'].insert_one({
+            "shopname": shopname,
+            "ownername": ownername,
+            "email": email,
+            "phone": phone,
+            "password": hashed_password,
+            "address": address,
+            "city": city,
+            "certification": certification,
+            "timing": timing,
+            "categories": categories,
+            "blueprint": blueprint,
+            "gstin": gstin,
+        })
+        inserted_id = str(result.inserted_id)
+        return jsonify({
+            'status':'Success',
+            'inserted_id' : inserted_id
+        })
+    except:
+        return jsonify({
+            'status':'Phone number already registered'
+        })
+
+#Login - Shop [Done]
+@app.route("/shoplogin",methods=['POST'])
+def shoplogin():
+    body=request.json
+    email=body.get('email')
+    password=body.get('password')
+
+    result_user = db['shops'].find_one({'email': email})
+
+    if bcrypt.check_password_hash(result_user['password'], password):
+        id = str(result_user['_id'])
+        return jsonify({
+            'id':id,
+            'status':'shopFound'
+        })
+    else:
+        return jsonify({
+            'status':'Shop Not Found'
+        })
+
+
 if __name__ == '__main__':
     app.run(port=3001)
