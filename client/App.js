@@ -10,19 +10,21 @@ import Severity from "./components/UserInfo/Severity";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { StatusBar } from 'expo-status-bar';
+import Homepage from "./pages/Homepage";
 const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BasicInfo" >
-        <Stack.Screen name="BasicInfo" component={BasicInfo} options={{headerShown: false}} />
-        <Stack.Screen name="dietaryRestrictions" component={dietaryRestrictions} options={{headerShown: false}} />
-        <Stack.Screen name="dietaryPreferences" component={dietaryPreferences} options={{headerShown: false}} />
-        <Stack.Screen name="Religious" component={Religious} options={{headerShown: false}} />
-        <Stack.Screen name="Allergies" component={Allergies} options={{headerShown: false}} />
-        <Stack.Screen name="Severity" component={Severity} options={{headerShown: false}} />
-        {/* <Stack.Screen name="Sign Up" component={Register} options={{headerShown: false}} />
-        <Stack.Screen name="Login" component={Login} options={{headerShown: false}} /> */}
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Sign Up" component={Register} options={{ headerShown: false }} />
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="BasicInfo" component={BasicInfo} options={{ headerShown: false }} />
+        <Stack.Screen name="dietaryRestrictions" component={dietaryRestrictions} options={{ headerShown: false }} />
+        <Stack.Screen name="dietaryPreferences" component={dietaryPreferences} options={{ headerShown: false }} />
+        <Stack.Screen name="Religious" component={Religious} options={{ headerShown: false }} />
+        <Stack.Screen name="Allergies" component={Allergies} options={{ headerShown: false }} />
+        <Stack.Screen name="Severity" component={Severity} options={{ headerShown: false }} />
+        <Stack.Screen name="HomePage" component={Homepage} options={{ headerShown: false }} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
