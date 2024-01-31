@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet, Text, View } from 'react-native';
 import BasicInfo from "./components/UserInfo/BasicInfo";
 import dietaryRestrictions from "./components/UserInfo/dietaryRestrictions";
 import dietaryPreferences from "./components/UserInfo/dietaryPreferences";
@@ -14,6 +13,9 @@ import ShopAdminLogin from "./pages/ShopAdminLogin";
 import Step1 from "./components/Shop/Step1";
 import Step2 from "./components/Shop/Step2";
 import SingleShopPage from "./pages/SingleShopPage";
+import AddToCart from "./pages/AddToCart";
+import Payment from "./pages/Payment";
+import SingleProductPage from "./pages/SingleProductPage";
 import Homepage from "./pages/Homepage";
 import ShopLogin from "./pages/ShopLogin";
 const Stack = createStackNavigator();
@@ -32,6 +34,9 @@ export default function App() {
         <Stack.Screen name="Religious" component={Religious} options={{ headerShown: false }} />
         <Stack.Screen name="Allergies" component={Allergies} options={{ headerShown: false }} />
         <Stack.Screen name="Severity" component={Severity} options={{ headerShown: false }} />
+        <Stack.Screen name="AddToCart" component={AddToCart} options={{headerShown: false}} />
+        <Stack.Screen name="payment" component={Payment} options={{headerShown: false}} />
+        <Stack.Screen name="SingleProductPage" component={SingleProductPage} options={{headerShown: false}} />
         <Stack.Screen name="Sign Up" component={Register} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="SingleShopPage" component={SingleShopPage} options={{ headerShown: false }} />
@@ -41,12 +46,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
