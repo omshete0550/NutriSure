@@ -55,8 +55,8 @@ export default function Register({ navigation }) {
 
 
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
-      <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>User Sign Up</Text>
+    <View style={styles.Lcontainer}>
+      <Text style={styles.textLarge}>User Sign Up</Text>
       <View>
         <Text style={styles.textSmall}>First Name:</Text>
         <TextInput
@@ -126,18 +126,23 @@ export default function Register({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  Lcontainer: {
     flex: 1,
     backgroundColor: "#fff",
-  },
-  radiocontainer: {
-    flex: 1,
+    // justifyContent: "center",
+    alignContent: "center",
     padding: 20,
+    paddingTop: 80
   },
   textSmall: {
     fontSize: 16,
     fontWeight: 600,
-    paddingHorizontal: 20,
+  },
+  textLarge: {
+    fontSize: 32,
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: 20,
   },
   text: {
     fontSize: 16,
@@ -156,19 +161,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textInput: {
-    borderWidth: 1,
-    borderColor: "#3f3f3f",
-    padding: 10,
-    margin: 10,
-    width: 300,
+    borderWidth: 0.5,
+    borderColor: "#d3d3d3",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    fontSize: 18,
+    marginTop: 20,
+    width: 375,
     borderRadius: 10,
+    shadowOffset: { width: -3, height: 4 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    marginBottom: 30,
   },
   btn: {
     backgroundColor: "#0484ac",
-    paddingHorizontal: 50,
-    paddingVertical: 8,
+    paddingHorizontal: 70,
+    paddingVertical: 12,
     borderRadius: 5,
     marginRight: 10,
+  },
+  btnN: {
+    backgroundColor: "#0484ac",
+    paddingHorizontal: 70,
+    paddingVertical: 12,
+    borderRadius: 5,
+    marginRight: 10,
+    marginTop: 40,
   },
   btnText: {
     fontWeight: 600,

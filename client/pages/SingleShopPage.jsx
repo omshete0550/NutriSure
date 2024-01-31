@@ -19,7 +19,7 @@ const products = [
     image:
       "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
     isVeg: true,
-    severity: "70%"
+    severity: "70%",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const products = [
     image:
       "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
     isVeg: false,
-    severity: "70%"
+    severity: "70%",
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const products = [
     image:
       "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
     isVeg: true,
-    severity: "70%"
+    severity: "70%",
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const products = [
     image:
       "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
     isVeg: true,
-    severity: "70%"
+    severity: "70%",
   },
   {
     id: 5,
@@ -59,7 +59,7 @@ const products = [
     image:
       "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
     isVeg: true,
-    severity: "70%"
+    severity: "70%",
   },
 ];
 
@@ -85,9 +85,19 @@ export default function SingleShopPage() {
         <View key={product.id} style={styles.content}>
           {/* Veg/Non-Veg logo */}
           {product.isVeg ? (
-            <Ionicons name="leaf" size={20} color="green" style={styles.vegIcon} />
+            <Ionicons
+              name="leaf"
+              size={20}
+              color="green"
+              style={styles.vegIcon}
+            />
           ) : (
-            <Ionicons name="skull" size={20} color="red" style={styles.nonVegIcon} />
+            <Ionicons
+              name="skull"
+              size={20}
+              color="red"
+              style={styles.nonVegIcon}
+            />
           )}
 
           <Image source={{ uri: product.image }} style={styles.logoImage} />
@@ -96,13 +106,22 @@ export default function SingleShopPage() {
             <Text style={styles.text}>{product.name}</Text>
             <Text style={{ marginBottom: 5 }}>{product.description}</Text>
             <Text style={styles.price}>Price: ₹{product.price}</Text>
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => handleAddToCart(product)}
-            >
-              <Text style={styles.btnText}>Add</Text>
-              <Ionicons name="cart" size={20} color="#fff" />
-            </TouchableOpacity>
+            <View style={{flex: 1, flexDirection: "row"}}>
+              <TouchableOpacity
+                style={styles.Pbtn}
+                onPress={() => handleAddToCart(product)}
+              >
+                <Text style={styles.btnText}>Add</Text>
+                <Ionicons name="cart" size={18} color="#fff" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.Pbtn}
+                onPress={() => navigation.navigate("SingleProductPage")}
+              >
+                <Text style={styles.btnText}>View</Text>
+                {/* <Ionicons name="cart" size={20} color="#fff" /> */}
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       ))}
@@ -157,15 +176,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
-  btn: {
+  Pbtn: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     gap: 10,
     backgroundColor: "#0484ac",
-    width: 200,
-    paddingHorizontal: 40,
-    paddingVertical: 7,
+    width: 115,
+    paddingHorizontal: 30,
+    paddingVertical: 5,
     borderRadius: 5,
     marginRight: 10,
     marginTop: 10,
@@ -173,7 +192,7 @@ const styles = StyleSheet.create({
   btnText: {
     fontWeight: 600,
     color: "white",
-    fontSize: 20,
+    fontSize: 18,
     textAlign: "center",
   },
   vegIcon: {

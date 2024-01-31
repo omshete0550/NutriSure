@@ -9,34 +9,33 @@ import React, { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
-  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const login = async () => {
-
-    const apiUrl = 'http://localhost:3001/login';
+    const apiUrl = "http://192.168.137.228:3001/login";
 
     const postData = {
       email: email,
-      password: password
+      password: password,
     };
 
     try {
+      console.log("opopopop");
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
-
+      console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
 
-      console.log('Data received:', data);
+      console.log("Data received:", data);
       if (data.status === "userFound") {
         await AsyncStorage.setItem("id", data.id.toString());
         navigation.navigate('BasicInfo');
@@ -45,17 +44,14 @@ export default function Login({ navigation }) {
         navigation.navigate('Login');
       }
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
     }
-
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
-
-      <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>User Login</Text>
-
+    <View style={styles.Lcontainer}>
       <View>
+        <Text style={styles.textLarge}>User Login</Text>
         <Text style={styles.textSmall}>Email:</Text>
         <TextInput
           placeholder="Enter your email"
@@ -86,18 +82,23 @@ export default function Login({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  Lcontainer: {
     flex: 1,
     backgroundColor: "#fff",
-  },
-  radiocontainer: {
-    flex: 1,
+    // justifyContent: "center",
+    alignContent: "center",
     padding: 20,
+    paddingTop: 80,
   },
   textSmall: {
     fontSize: 16,
     fontWeight: 600,
-    paddingHorizontal: 20,
+  },
+  textLarge: {
+    fontSize: 32,
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: 100,
   },
   text: {
     fontSize: 16,
@@ -116,19 +117,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textInput: {
-    borderWidth: 1,
-    borderColor: "#3f3f3f",
-    padding: 10,
-    margin: 10,
-    width: 300,
+    borderWidth: 0.5,
+    borderColor: "#d3d3d3",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    fontSize: 18,
+    marginTop: 20,
+    width: 375,
     borderRadius: 10,
+    shadowOffset: { width: -3, height: 4 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    marginBottom: 30,
   },
   btn: {
     backgroundColor: "#0484ac",
-    paddingHorizontal: 50,
-    paddingVertical: 8,
+    paddingHorizontal: 70,
+    paddingVertical: 12,
     borderRadius: 5,
     marginRight: 10,
+  },
+  btnN: {
+    backgroundColor: "#0484ac",
+    paddingHorizontal: 70,
+    paddingVertical: 12,
+    borderRadius: 5,
+    marginRight: 10,
+    marginTop: 40,
   },
   btnText: {
     fontWeight: 600,
