@@ -52,6 +52,8 @@ export default function Login({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center" }}>
 
+      <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>User Login</Text>
+
       <View>
         <Text style={styles.textSmall}>Email:</Text>
         <TextInput
@@ -75,6 +77,7 @@ export default function Login({ navigation }) {
       <TouchableOpacity style={styles.btn} onPress={login}>
         <Text style={styles.btnText}>Sign In</Text>
       </TouchableOpacity>
+      <br></br>
       <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate('Sign Up')}}>
         <Text style={styles.btnText}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>

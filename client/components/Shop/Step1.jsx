@@ -64,6 +64,7 @@ export default function Step1({ }) {
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>ShopKeeper Sign Up</Text>
       <View>
         <Text style={styles.textSmall}>Shop Name:</Text>
         <TextInput

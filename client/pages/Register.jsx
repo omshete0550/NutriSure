@@ -56,6 +56,7 @@ export default function Register({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: "center" }}>
+      <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>User Sign Up</Text>
       <View>
         <Text style={styles.textSmall}>First Name:</Text>
         <TextInput
