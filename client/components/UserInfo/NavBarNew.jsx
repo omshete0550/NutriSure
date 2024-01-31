@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'; // Assuming you're usi
 const NavBarNew = () => {
   const navigation = useNavigation();
   const icons = [
-    { name: 'home', label: 'Home', screen: 'BasicInfo' },
+    { name: 'home', label: 'Home', screen: 'HomePage' },
     { name: 'chatbubble-ellipses', label: 'Community', screen: 'CommunityScreen' },
     { name: 'person-circle', label: 'Profile', screen: 'ProfileScreen' },
     { name: 'restaurant', label: 'Recipe', screen: 'RecipeScreen' },

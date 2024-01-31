@@ -38,7 +38,7 @@ export default function ShopLogin({ navigation }) {
 
             console.log('Data received:', data);
             if (data.status === "shopFound") {
-                await AsyncStorage.setItem("shopid", data.id.toString());
+                await AsyncStorage.setItem("shopid", JSON.parse(data.id));
                 navigation.navigate('ShopLogin');
             }
             else {
@@ -52,7 +52,7 @@ export default function ShopLogin({ navigation }) {
 
     return (
         <View style={{ flex: 1, alignItems: "center" }}>
-            <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>ShopKeeper Login</Text>
+            <Text style={{fontSize:"1.25rem"}}>ShopKeeper Login</Text>
 
             <View>
                 <Text style={styles.textSmall}>Email:</Text>

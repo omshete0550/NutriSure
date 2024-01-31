@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontWeight: "bold",
+    fontWeight: 600,
   },
   image: {
     width: 100,

@@ -20,7 +20,7 @@ const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [animation] = useState(new Animated.Value(0));
   const icons = [
-    { name: "home", label: "Home", screen: "BasicInfo" },
+    { name: "home", label: "Home", screen: "Homepage" },
     {
       name: "chatbubble-ellipses",
       label: "Community",

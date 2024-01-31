@@ -13,7 +13,7 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState("");
 
   const login = async () => {
-    const apiUrl = "http://192.168.137.228:3001/login";
+    const apiUrl = "http://192.168.31.39:3001/login";
 
     const postData = {
       email: email,
@@ -21,7 +21,6 @@ export default function Login({ navigation }) {
     };
 
     try {
-      console.log("opopopop");
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -37,7 +36,7 @@ export default function Login({ navigation }) {
 
       console.log("Data received:", data);
       if (data.status === "userFound") {
-        await AsyncStorage.setItem("id", data.id.toString());
+        // await AsyncStorage.setItem("id", JSON.parse(data.id));
         navigation.navigate('BasicInfo');
       }
       else {
@@ -92,17 +91,17 @@ const styles = StyleSheet.create({
   },
   textSmall: {
     fontSize: 16,
-    fontWeight: 600,
+    // fontWeight: 600,
   },
   textLarge: {
     fontSize: 32,
-    fontWeight: "600",
+    // fontWeight: 600,
     textAlign: "center",
     marginBottom: 100,
   },
   text: {
     fontSize: 16,
-    fontWeight: 600,
+    // fontWeight: 600,
     padding: 20,
   },
   progreeBar: {
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   btnText: {
-    fontWeight: 600,
+    // fontWeight: 600,
     color: "white",
     fontSize: 18,
     textAlign: "center",

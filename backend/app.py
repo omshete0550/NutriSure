@@ -205,7 +205,7 @@ def shopsignup():
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
     try:
-        db['shops'].create_index([('gstin', pymongo.ASCENDING)], unique=True)
+        db['shops'].create_index([('phone', pymongo.ASCENDING)], unique=True)
         result = db['shops'].insert_one({
             "shopname": shopname,
             "ownername": ownername,
@@ -229,7 +229,7 @@ def shopsignup():
         return jsonify({
             'status':'Phone number already registered'
         })
-    
+
 #SignUp Update - Shop [Done]
 @app.route("/<id>/reshopsignup",methods=['POST'])
 def reshopsignup(id):

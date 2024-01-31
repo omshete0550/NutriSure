@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: "600",
+    fontWeight: 600,
     textAlign: "center",
   },
   text: {
     fontSize: 24,
-    fontWeight: "500",
+    fontWeight: 500,
     marginBottom: 5,
   },
   price: {

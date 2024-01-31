@@ -60,7 +60,7 @@ const StepOne = ({ navigation }) => {
       </View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <View style={styles.titleCont}>
-          <Text style={{ fontSize: 45, fontWeight: "bold" }}>Hey user!</Text>
+          <Text style={{ fontSize: 45 }}>Hey user!</Text>
           <Text style={{ textAlign: "center", marginTop: 10, fontSize: 12 }}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
             tempora maxime consequuntur nulla quidem iure?
