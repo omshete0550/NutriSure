@@ -15,16 +15,16 @@ const StepOne = ({ navigation }) => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
 
-  console.log(name, age, gender)
+  console.log(name, age, gender);
   return (
     <View style={styles.container}>
       <View style={styles.progreeBar}>
-        <ProgressBar progress={0.167} width={325} />
+        <ProgressBar progress={0.167} width={375} />
       </View>
-      <View style={{ flex: 1, marginTop: 10, alignItems: "center" }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <View style={styles.titleCont}>
-          <Text style={{ fontSize: 30, fontWeight: "bold" }}>Hey user!</Text>
-          <Text style={{ textAlign: "center", marginTop: 10 }}>
+          <Text style={{ fontSize: 45, fontWeight: "bold" }}>Hey user!</Text>
+          <Text style={{ textAlign: "center", marginTop: 10, fontSize: 12 }}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
             tempora maxime consequuntur nulla quidem iure?
           </Text>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   progreeBar: {
-    marginTop: 20,
+    marginTop: 50,
     padding: 20,
   },
   titleCont: {
@@ -81,25 +81,37 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textInput: {
-    borderWidth: 1,
-    borderColor: "#3f3f3f",
-    padding: 10,
+    borderWidth: 0.5,
+    borderColor: "#d3d3d3",
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    fontSize: 18,
     margin: 10,
-    width: 300,
+    width: 375,
     borderRadius: 10,
+    shadowOffset: { width: -3, height: 4 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   btn: {
     backgroundColor: "#0484ac",
     marginTop: 30,
-    paddingHorizontal: 50,
-    paddingVertical: 8,
+    paddingHorizontal: 100,
+    paddingVertical: 15,
     borderRadius: 5,
   },
   btnText: {
     fontWeight: 600,
     color: "white",
-    fontSize: 18,
+    fontSize: 21,
     textAlign: "center",
+  },
+  shadowProp: {
+    shadowOffset: { width: -2, height: 4 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
 });
 
