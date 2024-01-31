@@ -9,14 +9,13 @@ const Receipe = () => {
 
   const submit = async () => {
     const combinedString = ingredients.filter(Boolean).join(', ');
-    
+
     const postData = {
       ingredients: combinedString,
     };
-navigation.navigate("ReceipeFinal");
     try {
       // Replace with the correct API endpoint for your Flask backend
-      const apiUrl = 'http';
+      const apiUrl = 'https://d356-203-212-25-167.ngrok-free.app/generate_recipe';
 
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -33,10 +32,14 @@ navigation.navigate("ReceipeFinal");
       const data = await response.json();
 
       // Store the id in AsyncStorage (assuming it's part of the response)
-      await AsyncStorage.setItem("id", data.id.toString());
+      // await AsyncStorage.setItem("id", data.id.toString());
 
-      // Navigate to 'ReceipeFinal'
-      navigation.navigate('ReceipeFinal');
+      // Navigate to 'ReceipeFinal' with the generated recipe data
+      navigation.navigate('ReceipeFinal', {
+        title: data.title,
+        ingredients: data.ingredients,
+        directions: data.directions
+      });
     } catch (error) {
       console.error('Fetch error:', error);
     }

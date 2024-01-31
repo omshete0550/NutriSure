@@ -139,7 +139,7 @@ export default function App() {
                         headerShown: false,
                     }}
                 />
-<Stack.Screen
+                <Stack.Screen
                     name="Receipe"
                     component={Receipe}
                     options={{

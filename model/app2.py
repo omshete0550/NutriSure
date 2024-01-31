@@ -5,8 +5,10 @@ import os
 import re
 import dummy
 from utils.api import generate_cook_image
+from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 class TextGeneration:
     def __init__(self):
@@ -169,11 +171,12 @@ def generate_recipe():
             "directions": generated_recipe["directions"],
             "image": generated_recipe["image"]
         }
+        print(response)
 
-        return jsonify(response)
+        return jsonify(response), 200
 
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

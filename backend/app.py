@@ -326,5 +326,26 @@ def getallshops():
         datajson.append(dataDict)
     return jsonify(datajson)
 
+@app.route('/postreport', methods=['POST'])
+def post_report():
+    try:
+        # Get JSON data from the request
+        data = request.get_json()
+
+        # Extract data from the JSON data
+        store_name = data.get('storeName', '')
+        product_name = data.get('productName', '')
+        product_issues = data.get('productIssues', [])
+
+        result = db['shops'].insert_one({
+            "store_name": store_name,
+            "store_name": product_name,
+            "product_issues": product_issues,
+        })
+        print(result)
+        return jsonify({"message": "Report submitted successfully"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
     app.run(port=3001)
