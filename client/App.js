@@ -25,6 +25,8 @@ import SingleProductPage from "./pages/SingleProductPage";
 import Homepage from "./pages/Homepage";
 import ShopLogin from "./pages/ShopLogin";
 import ProfileScreen from "./pages/ProfileScreen";
+import Receipe from "./pages/Receipe";
+import ReceipeFinal from "./pages/ReceipeFinal";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -137,7 +139,20 @@ export default function App() {
                         headerShown: false,
                     }}
                 />
-
+<Stack.Screen
+                    name="Receipe"
+                    component={Receipe}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="ReceipeFinal"
+                    component={ReceipeFinal}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
                 <Stack.Screen
                     name="ProfileScreen"
                     component={ProfileScreen}
