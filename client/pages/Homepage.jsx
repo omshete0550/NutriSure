@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Animated, StyleSheet, Text, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import SearchBar from '../components/UserInfo/SearchBar';
-import FoodCard from '../components/UserInfo/FoodCard';
-import StoreCard from '../components/UserInfo/StoreCard';
-import Navbar from '../components/UserInfo/NavBarNew';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import {
+  View,
+  TouchableOpacity,
+  Animated,
+  StyleSheet,
+  Text,
+  ScrollView,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import SearchBar from "../components/UserInfo/SearchBar";
+import FoodCard from "../components/UserInfo/FoodCard";
+import StoreCard from "../components/UserInfo/StoreCard";
+import Navbar from "../components/UserInfo/NavBarNew";
+import { useNavigation } from "@react-navigation/native";
 
 const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
-   const navigation = useNavigation();
+  const navigation = useNavigation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [animation] = useState(new Animated.Value(0));
   const icons = [
-    { name: 'home', label: 'Home', screen: 'BasicInfo' },
-    { name: 'chatbubble-ellipses', label: 'Community', screen: 'CommunityScreen' },
-    { name: 'person-circle', label: 'Profile', screen: 'ProfileScreen' },
-    { name: 'restaurant', label: 'Recipe', screen: 'RecipeScreen' },
+    { name: "home", label: "Home", screen: "BasicInfo" },
+    {
+      name: "chatbubble-ellipses",
+      label: "Community",
+      screen: "CommunityScreen",
+    },
+    { name: "person-circle", label: "Profile", screen: "ProfileScreen" },
+    { name: "restaurant", label: "Recipe", screen: "RecipeScreen" },
   ];
 
   const toggleMenu = () => {
@@ -31,24 +42,22 @@ const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
 
   const slideMenuAnimation = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: ['-100%', '0%'],
+    outputRange: ["-100%", "0%"],
   });
 
   const handleMenuItemPress = (item) => {
-//   console.log(Pressed: ${item});
+    //   console.log(Pressed: ${item});
     // Ensure item.screen is set correctly
     console.log(item);
-  
-    navigation.navigate(item);
-  
-};
 
+    navigation.navigate(item);
+  };
 
   return (
     <View style={styles.container}>
-      <ScrollView style={{ height: '630px' }}>
+      <ScrollView style={{ height: "630px" }}>
         <LinearGradient
-          colors={['#6E8EFB', '#4A66E3']}
+          colors={["#6E8EFB", "#4A66E3"]}
           start={[0, 0.5]}
           end={[1, 0.5]}
           style={styles.header}
@@ -64,7 +73,12 @@ const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
               <Text style={styles.locationText}>{location}</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.cartIcon} onPress={() => {/* Handle cart click */}}>
+          <TouchableOpacity
+            style={styles.cartIcon}
+            onPress={() => {
+              /* Handle cart click */
+            }}
+          >
             <Ionicons name="cart" size={24} color="white" />
           </TouchableOpacity>
         </LinearGradient>
@@ -88,13 +102,22 @@ const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
         </View>
       </ScrollView>
       <Animated.View style={[styles.menuBar, { left: slideMenuAnimation }]}>
-        <TouchableOpacity style={styles.menuItem} onPress={() => handleMenuItemPress('Report')}>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => handleMenuItemPress("Report")}
+        >
           <Text style={styles.menuItemText}>Report</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem} onPress={() => handleMenuItemPress('Favorites')}>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => handleMenuItemPress("Favorites")}
+        >
           <Text style={styles.menuItemText}>Favorites</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem} onPress={() => handleMenuItemPress('Settings')}>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => handleMenuItemPress("Settings")}
+        >
           <Text style={styles.menuItemText}>Settings</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.closeIcon} onPress={toggleMenu}>
@@ -110,9 +133,9 @@ const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative',
-    backgroundColor: 'white',
-    justifyContent: 'flex-start',
+    position: "relative",
+    backgroundColor: "white",
+    justifyContent: "flex-start",
     // paddingTop: 50
   },
   header: {
@@ -122,73 +145,74 @@ const styles = StyleSheet.create({
     // height: ,
     borderBottomLeftRadius: 250,
     borderBottomRightRadius: -250,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    paddingTop: 50
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    paddingTop: 50,
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginTop: 10,
-    color: 'white',
+    color: "white",
   },
   searchBarContainer: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   menuIcon: {
     marginRight: 15,
-    marginTop: 10
+    marginTop: 10,
   },
   cartIcon: {
     marginLeft: 15,
     marginTop: 10,
   },
   locationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 5,
   },
   locationText: {
-    color: 'white',
+    color: "white",
     marginLeft: 5,
-    fontSize: 21
+    fontSize: 21,
   },
   recommendedFoodSection: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 20,
     marginTop: 20,
   },
   recommendedFoodTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#4A66E3',
+    fontWeight: "bold",
+    color: "#4A66E3",
   },
   exploreMoreButton: {
     padding: 10,
   },
   exploreMoreButtonText: {
-    fontWeight: 'bold',
-    color: '#4A66E3',
+    fontWeight: "bold",
+    color: "#4A66E3",
   },
   recommendedFoodContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     marginTop: 10,
   },
   menuBar: {
-    position: 'absolute',
+    width: "50%",
+    position: "absolute",
     top: 0,
     bottom: 0,
     left: 0,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     zIndex: 1,
-    paddingVertical: 20,
+    paddingVertical: 80,
     paddingHorizontal: 10,
   },
   menuItem: {
@@ -196,20 +220,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   menuItemText: {
-    fontSize: 16,
+    fontSize: 20,
   },
   closeIcon: {
-    position: 'absolute',
-    top: 10,
+    position: "absolute",
+    top: 60,
     right: 10,
   },
   overlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     bottom: 0,
     right: 0,
     left: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     zIndex: 0,
   },
 });

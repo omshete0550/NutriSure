@@ -1,17 +1,22 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 const stores = [
   { title: "Big Bazaar", image: require("../../assets/bigbazar.jpg") },
   { title: "Walmart", image: require("../../assets/bigbazar.jpg") },
   { title: "Shop99", image: require("../../assets/bigbazar.jpg") },
 ];
 
-const StoreCard = ({ title, image }) => (
-  <View style={styles.card}>
-    <Text style={styles.title}>{title}</Text>
-    <Image source={image} style={styles.image} />
-  </View>
-);
+const StoreCard = ({ title, image }) => {
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate("SingleShopPage")}>
+      <View style={styles.card}>
+        <Text style={styles.title}>{title}</Text>
+        <Image source={image} style={styles.image} />
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const StoreList = () => (
   <View style={styles.container}>
@@ -27,7 +32,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     width: "100%",
-    paddingBottom: 50
+    paddingBottom: 50,
   },
   card: {
     flexDirection: "column",

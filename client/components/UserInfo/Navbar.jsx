@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'; // Assuming you're using React Navigation for navigation
+import { useNavigation } from '@react-navigation/native';
 
 const Navbar = () => {
   const navigation = useNavigation();
   const icons = [
-    { name: 'home', label: 'Home', screen: 'BasicInfo' },
+    { name: 'home', label: 'Home', screen: 'Homepage' },
     { name: 'chatbubble-ellipses', label: 'Community', screen: 'CommunityScreen' },
     { name: 'person-circle', label: 'Profile', screen: 'ProfileScreen' },
     { name: 'restaurant', label: 'Recipe', screen: 'RecipeScreen' },
