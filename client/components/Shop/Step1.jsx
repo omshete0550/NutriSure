@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Step1({ }) {
   const navigation = useNavigation();
@@ -23,7 +24,7 @@ export default function Step1({ }) {
       alert("Check Password")
     }
     else {
-      const apiUrl = 'http://localhost:3001/shopsignup';
+      const apiUrl = 'https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/shopsignup';
 
       const postData = {
         shopname: shopname,
@@ -49,11 +50,11 @@ export default function Step1({ }) {
 
         console.log('Data received:', data);
         if (data.status === "Success") {
+          await AsyncStorage.setItem("shopid",(data.inserted_id));
           navigation.navigate("Step2")
-          localStorage.setItem("shopid",data.inserted_id)
         }
         else {
-          navigation.navigate('Register');
+          navigation.navigate('Step1');
         }
       } catch (error) {
         console.error('Fetch error:', error);
@@ -64,7 +65,7 @@ export default function Step1({ }) {
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>ShopKeeper Sign Up</Text>
+      <Text >ShopKeeper Sign Up</Text>
       <View>
         <Text style={styles.textSmall}>Shop Name:</Text>
         <TextInput

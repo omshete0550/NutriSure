@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import RadioButton from "../RadioButton/RadioButton";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const dietaryRestrictions = ({ navigation }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -19,8 +20,14 @@ const dietaryRestrictions = ({ navigation }) => {
     { label: "Nut allergies", value: "Nut allergies" },
     { label: "Shellfish allergies", value: "Shellfish allergies" },
   ];
-
-  const id = localStorage.getItem("id")
+  
+  const [id, setId] = useState("");
+  useEffect(()=>{
+    getid();
+  },[])
+  const getid=async()=>{
+    setId(await AsyncStorage.getItem("id"))
+  }
 
   const next = async () => {
     let newArray = []
@@ -37,7 +44,7 @@ const dietaryRestrictions = ({ navigation }) => {
       ];
     }
 
-    const apiUrl = `http://localhost:3001/${id}/resignup`;
+    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       diet_resctriction: newArray,

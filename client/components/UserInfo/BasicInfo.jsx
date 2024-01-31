@@ -1,5 +1,5 @@
 // StepOne.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,48 +10,51 @@ import {
 } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import ProgressBar from "react-native-progress/Bar";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const StepOne = ({ navigation }) => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [city, setCity] = useState("");
+  const [id,setId]=useState("")
 
   const handleGenderChange = (selectedGender) => {
     setGender(selectedGender);
   };
-
-  const id=localStorage.getItem("id")
-
+  useEffect(()=>{
+    getid();
+  },[])
+  const getid=async()=>{
+    setId(await AsyncStorage.getItem("id"))
+  }
   const next = async () => {
-
-    const apiUrl = `http://localhost:3001/${id}/resignup`;
+  
+    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       age: age,
       gender: gender,
-      city:city
+      city: city,
     };
 
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      navigation.navigate("dietaryRestrictions")
-
+      navigation.navigate("dietaryRestrictions");
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
     }
-  }
-
+  };
 
   return (
     <View style={styles.container}>
@@ -60,7 +63,7 @@ const StepOne = ({ navigation }) => {
       </View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <View style={styles.titleCont}>
-          <Text style={{ fontSize: 45, fontWeight: "bold" }}>Hey user!</Text>
+          <Text style={{ fontSize: 45, fontWeight: "bold" }}>Hey User!</Text>
           <Text style={{ textAlign: "center", marginTop: 10, fontSize: 12 }}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
             tempora maxime consequuntur nulla quidem iure?
@@ -82,34 +85,36 @@ const StepOne = ({ navigation }) => {
           />
 
           <Text>Gender</Text>
-          <TouchableWithoutFeedback onPress={() => handleGenderChange('male')}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableWithoutFeedback onPress={() => handleGenderChange("male")}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View
                 style={{
                   width: 20,
                   height: 20,
                   borderRadius: 10,
                   borderWidth: 1,
-                  borderColor: 'black',
+                  borderColor: "black",
                   marginRight: 8,
-                  backgroundColor: gender === 'male' ? 'blue' : 'transparent',
+                  backgroundColor: gender === "male" ? "blue" : "transparent",
                 }}
               />
               <Text>Male</Text>
             </View>
           </TouchableWithoutFeedback>
 
-          <TouchableWithoutFeedback onPress={() => handleGenderChange('female')}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableWithoutFeedback
+            onPress={() => handleGenderChange("female")}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View
                 style={{
                   width: 20,
                   height: 20,
                   borderRadius: 10,
                   borderWidth: 1,
-                  borderColor: 'black',
+                  borderColor: "black",
                   marginRight: 8,
-                  backgroundColor: gender === 'female' ? 'pink' : 'transparent',
+                  backgroundColor: gender === "female" ? "pink" : "transparent",
                 }}
               />
               <Text>Female</Text>
@@ -117,11 +122,7 @@ const StepOne = ({ navigation }) => {
           </TouchableWithoutFeedback>
         </View>
         <View>
-          <TouchableOpacity
-            style={styles.btn}
-            title="Next"
-            onPress={next}
-          >
+          <TouchableOpacity style={styles.btn} title="Next" onPress={next}>
             <Text style={styles.btnText}>Next</Text>
           </TouchableOpacity>
         </View>
