@@ -98,7 +98,6 @@ const StepOne = ({ navigation }) => {
               <Text>Male</Text>
             </View>
           </TouchableWithoutFeedback>
-          <br></br>
 
           <TouchableWithoutFeedback onPress={() => handleGenderChange('female')}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>

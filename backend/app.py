@@ -80,9 +80,11 @@ def signup():
 #Login - User [Done]
 @app.route("/login",methods=['POST'])
 def login():
+    print("opopopo")
     body=request.json
     email=body.get('email')
     password=body.get('password')
+    print(email)
 
     result_user = db['user'].find_one({'email': email})
 

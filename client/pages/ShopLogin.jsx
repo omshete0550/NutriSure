@@ -51,14 +51,7 @@ export default function ShopLogin({ navigation }) {
 
     return (
         <View style={{ flex: 1, alignItems: "center" }}>
-            <br></br>
-            <br></br>
-            <br></br>
             <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>ShopKeeper Login</Text>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
 
             <View>
                 <Text style={styles.textSmall}>Email:</Text>
@@ -83,7 +76,7 @@ export default function ShopLogin({ navigation }) {
             <TouchableOpacity style={styles.btn} onPress={login}>
                 <Text style={styles.btnText}>Sign In</Text>
             </TouchableOpacity>
-            <br></br>
+
             <TouchableOpacity style={styles.btn} onPress={() => { navigation.navigate('ShopAdminLogin') }}>
                 <Text style={styles.btnText}>Don't have an account? Sign Up</Text>
             </TouchableOpacity>

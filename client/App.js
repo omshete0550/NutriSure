@@ -23,7 +23,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" >
+      <Stack.Navigator initialRouteName="SingleShopPage" >
         <Stack.Screen name="ShopAdminLogin" component={ShopAdminLogin} options={{ headerShown: false }} />
         <Stack.Screen name="ShopLogin" component={ShopLogin} options={{ headerShown: false }} />
         <Stack.Screen name="Step1" component={Step1} options={{ headerShown: false }} />
