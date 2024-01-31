@@ -326,5 +326,25 @@ def getallshops():
         datajson.append(dataDict)
     return jsonify(datajson)
 
+@app.route("/report",methods=['POST'])
+def postreport():
+    body=request.json
+    storename=body.get('storeName')
+    productname=body.get('productName')
+    productissues=body.get('productIssues')
+
+    # db['reports'].create_index([('storename', pymongo.ASCENDING)])
+    result = db['reports'].insert_one({
+        "storename": storename,
+        "productname": productname,
+        "productissues": productissues    
+    })
+    inserted_id = str(result.inserted_id)
+    return jsonify({
+        'status':'Success',
+        'inserted_id' : inserted_id
+    })
+
+
 if __name__ == '__main__':
     app.run(port=3001)

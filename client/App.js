@@ -30,7 +30,7 @@ const Stack = createStackNavigator();
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="HomePage">
+            <Stack.Navigator initialRouteName="Report">
                 <Stack.Screen
                     name="ShopAdminLogin"
                     component={ShopAdminLogin}
