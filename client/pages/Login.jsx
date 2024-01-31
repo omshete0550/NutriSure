@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
       console.log('Data received:', data);
       if (data.status === "userFound") {
         localStorage.setItem("id",data.id)
-        navigation.navigate('BasicInfo');
+        navigation.navigate('HomePage');
       }
       else {
         navigation.navigate('Login');

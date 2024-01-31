@@ -116,7 +116,6 @@ def resignup(id):
     cooking_skills=body.get('cooking_skills')
     notifications=body.get('notifications')
 
-    print(age)
     try:
         if(age):
             db['user'].update_one(
@@ -224,6 +223,46 @@ def shopsignup():
             'status':'Success',
             'inserted_id' : inserted_id
         })
+    except:
+        return jsonify({
+            'status':'Phone number already registered'
+        })
+    
+#SignUp Update - Shop [Done]
+@app.route("/<id>/reshopsignup",methods=['POST'])
+def reshopsignup(id):
+    body=request.json
+    shopname=body.get('shopname')
+    ownername=body.get('ownername')
+    email=body.get('email')
+    phone=body.get('phone')
+    password=body.get('password')
+    address=body.get('address')
+    city=body.get('city')
+    certification=body.get('certification')
+    timing=body.get('timing')
+    categories=body.get('categories')
+    blueprint=body.get('blueprint')
+    gstin=body.get('gstin')
+
+    try:
+        db['shops'].update_one(
+                {'_id': ObjectId(id)},
+                {
+                    '$set': {
+                        "address":address,
+                        "city":city,
+                        "certification":certification,
+                        "timing":timing,
+                        "categories":categories,
+                        "blueprint":blueprint,
+                        "gstin":gstin
+                    }
+                }
+            )
+        return jsonify({
+            'status':'Success'
+        })  
     except:
         return jsonify({
             'status':'Phone number already registered'
