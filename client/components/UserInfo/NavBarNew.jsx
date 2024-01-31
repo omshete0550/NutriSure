@@ -62,7 +62,7 @@ const NavBarNew = () => {
             >
               <Ionicons
                 name={icon.name}
-                size={25}
+                size={30}
                 color="#1A3567"
                 style={styles.navIcon}
               />
@@ -76,7 +76,7 @@ const NavBarNew = () => {
   style={styles.barcodeIconContainer}
   onPress={() => navigateToScreen('ScanBarCode')}
 >
-  <Ionicons name="barcode" size={25} style={styles.barcodeIcon} />
+  <Ionicons name="barcode" size={30} style={styles.barcodeIcon} />
 </TouchableOpacity>
 
     </View>
@@ -93,9 +93,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    padding: 10
   },
   touchable: {
-    borderRadius: 20,
+    // borderRadius: 20,
     overflow: 'hidden',
   },
   navIcon: {
@@ -106,16 +107,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   navLabel: {
-    fontSize: 12,
+    fontSize: 15,
     color: 'white',
   },
 barcodeIconContainer: {
     position: 'absolute',
-    bottom: 45, // Adjust as needed
-    left: '50%', // Center horizontally
+    bottom: 58, // Adjust as needed
+    left: '52%', // Center horizontally
     transform: [{ translateX: -25 }], // Half the width of the circle container
-    width: 50,
-    height: 50,
+    width: 55,
+    height: 55,
     borderRadius: 25, // Half the width and height to make it circular
     backgroundColor: '#4A66E3', // Blue color
     justifyContent: 'center',

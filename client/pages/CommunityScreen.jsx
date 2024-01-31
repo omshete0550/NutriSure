@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Dimensions, ScrollView, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Navbar from '../components/UserInfo/NavBarNew';
+import NavBarNew from '../components/UserInfo/NavBarNew';
 
 const { height: screenHeight } = Dimensions.get('window');
 
@@ -61,7 +62,7 @@ const CommunityScreen = () => {
         </View>
         <CardContainer />
       </ScrollView>
-      {/* <Navbar /> */}
+      <NavBarNew />
     </View>
   );
 };
@@ -70,12 +71,15 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: 80,
+    
   },
   cardContainer: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 20,
+    paddingTop: 350,
   },
   card: {
     width: 300,

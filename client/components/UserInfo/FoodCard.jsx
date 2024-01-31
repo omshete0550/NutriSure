@@ -1,9 +1,9 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from "react-native";
 
 const foods = [
-  { title: "Pizza", image: require("../../assets/ghee.jpg") },
-  { title: "Burger", image: require("../../assets/ghee.jpg") },
-  { title: "Sushi", image: require("../../assets/ghee.jpg") }
+  { title: "Ghee", image: require("../../assets/ghee.jpg") },
+  { title: "Cheese", image: require("../../assets/cheese.jpg") },
+  { title: "Ice Cream", image: require("../../assets/icecream.jpg") },
 ];
 
 const FoodCard = ({ title, image }) => (
@@ -23,26 +23,28 @@ const FoodList = () => (
 
 const styles = StyleSheet.create({
   foodListContainer: {
-        flexDirection: 'row',
-        // backgroundColor: 'red',
-      width:'100%',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between', // Adjust as needed
+    flexDirection: "row",
+    // backgroundColor: 'red',
+    width: "100%",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+// Adjust as needed
   },
   foodCard: {
-    width: 130,
+    width: 165,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 8,
     padding: 10,
     margin: 10,
+    alignItems: "center" 
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   image: {
-    width: 70,
-    height: '70px',
+    width: 100,
+    height: 80,
     borderRadius: 4,
     marginTop: 10,
   },
