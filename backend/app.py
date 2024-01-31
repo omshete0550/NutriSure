@@ -289,5 +289,36 @@ def shoplogin():
         })
 
 
+@app.route("/getallshops",methods=['GET'])
+def getallshops():
+    datajson=[]
+    allshops=db['shops'].find()
+    for data in allshops:
+        shopname=data['shopname']
+        ownername=data['ownername']
+        email=data['email']
+        phone=data['phone']
+        address=data['address']
+        city=data['city']
+        timing=data['timing']
+        categories=data['categories']
+        gstin=data['gstin']
+        id=str(data['_id'])
+
+        dataDict={
+            "name":shopname,
+            "ownername":ownername,
+            "email":email,
+            "phone":phone,
+            "address":address,
+            "city":city,
+            "timing":timing,
+            "gstin":gstin,
+            "categories":categories,
+            "id":id
+        }
+        datajson.append(dataDict)
+    return jsonify(datajson)
+
 if __name__ == '__main__':
     app.run(port=3001)
