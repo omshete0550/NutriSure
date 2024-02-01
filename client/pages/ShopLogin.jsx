@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ShopLogin({ navigation }) {
 
@@ -52,7 +53,7 @@ export default function ShopLogin({ navigation }) {
 
     return (
         <View style={{ flex: 1, alignItems: "center" }}>
-            <Text style={{fontSize:"1.25rem",fontWeight:"600"}}>ShopKeeper Login</Text>
+            <Text style={{fontSize:"1.25rem"}}>ShopKeeper Login</Text>
 
             <View>
                 <Text style={styles.textSmall}>Email:</Text>

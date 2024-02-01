@@ -63,7 +63,7 @@ export default function Step2({ navigation }) {
     console.log(result);
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setblueprint(result.assets[0].uri);
     }
   };
 

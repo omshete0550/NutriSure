@@ -233,7 +233,7 @@ def shopsignup():
         return jsonify({
             'status':'Phone number already registered'
         })
-    
+
 #SignUp Update - Shop [Done]
 @app.route("/<id>/reshopsignup",methods=['POST'])
 def reshopsignup(id):

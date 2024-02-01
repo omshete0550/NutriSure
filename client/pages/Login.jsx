@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -21,7 +22,6 @@ export default function Login({ navigation }) {
     };
 
     try {
-      console.log("opopopop");
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -73,12 +73,7 @@ export default function Login({ navigation }) {
       <TouchableOpacity style={styles.btn} onPress={login}>
         <Text style={styles.btnText}>Sign In</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.btnN}
-        onPress={() => {
-          navigation.navigate("Sign Up");
-        }}
-      >
+      <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate('Sign Up')}}>
         <Text style={styles.btnText}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
     </View>
@@ -96,17 +91,17 @@ const styles = StyleSheet.create({
   },
   textSmall: {
     fontSize: 16,
-    fontWeight: 600,
+    // fontWeight: 600,
   },
   textLarge: {
     fontSize: 32,
-    fontWeight: "600",
+    // fontWeight: 600,
     textAlign: "center",
     marginBottom: 100,
   },
   text: {
     fontSize: 16,
-    fontWeight: 600,
+    // fontWeight: 600,
     padding: 20,
   },
   progreeBar: {
@@ -151,7 +146,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   btnText: {
-    fontWeight: 600,
+    // fontWeight: 600,
     color: "white",
     fontSize: 18,
     textAlign: "center",
