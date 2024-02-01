@@ -74,7 +74,7 @@ const NavBarNew = () => {
       {/* Barcode icon */}
       <TouchableOpacity
   style={styles.barcodeIconContainer}
-  onPress={() => navigateToScreen('ScanBarCode')}
+  onPress={() => navigateToScreen('ScanResults')}
 >
   <Ionicons name="barcode" size={30} style={styles.barcodeIcon} />
 </TouchableOpacity>
