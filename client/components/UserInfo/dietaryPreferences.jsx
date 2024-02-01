@@ -9,7 +9,6 @@ import {
 import ProgressBar from "react-native-progress/Bar";
 import RadioButton from "../RadioButton/RadioButton";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const dietaryPreferences = ({ navigation }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
