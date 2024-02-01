@@ -26,14 +26,16 @@ import Homepage from "./pages/Homepage";
 import ShopLogin from "./pages/ShopLogin";
 import Receipe from "./pages/Receipe";
 import ReceipeFinal from "./pages/ReceipeFinal";
+import AddProduct from "./pages/AddProduct";
 const Stack = createStackNavigator();
 
 
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Receipe" >
+            <Stack.Navigator initialRouteName="AddProduct" >
             <Stack.Screen name="Receipe" component={Receipe} options={{ headerShown: false }} />
+            <Stack.Screen name="AddProduct" component={AddProduct} options={{ headerShown: false }} />
             <Stack.Screen name="ReceipeFinal" component={ReceipeFinal} options={{ headerShown: false }} />
                 {/* <Stack.Screen name="ShopAdminLogin" component={ShopAdminLogin} options={{ headerShown: false }} />
                 <Stack.Screen name="ShopLogin" component={ShopLogin} options={{ headerShown: false }} />
