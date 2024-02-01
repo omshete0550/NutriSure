@@ -5,11 +5,12 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
 
-export default function Step1({ }) {
+export default function Step1({}) {
   const navigation = useNavigation();
   const [shopname, setShopname] = useState("");
   const [ownername, setOwnername] = useState("");
@@ -19,28 +20,26 @@ export default function Step1({ }) {
   const [phone, setPhone] = useState("");
 
   const next = async () => {
-
     if (confPassword !== password) {
-      alert("Check Password")
-    }
-    else {
-      const apiUrl = 'https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/shopsignup';
+      alert("Check Password");
+    } else {
+      const apiUrl = "https://e3af-203-212-25-167.ngrok-free.app/shopsignup";
 
       const postData = {
         shopname: shopname,
         ownername: ownername,
         email: email,
         phone: phone,
-        password: password
+        password: password,
       };
 
       try {
         const response = await fetch(apiUrl, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         });
 
         if (!response.ok) {
@@ -48,88 +47,87 @@ export default function Step1({ }) {
         }
         const data = await response.json();
 
-        console.log('Data received:', data);
+        console.log("Data received:", data);
         if (data.status === "Success") {
-          await AsyncStorage.setItem("shopid",(data.inserted_id));
-          navigation.navigate("Step2")
-        }
-        else {
-          navigation.navigate('Step1');
+          await AsyncStorage.setItem("shopid", data.inserted_id);
+          navigation.navigate("Step2");
+        } else {
+          navigation.navigate("Step1");
         }
       } catch (error) {
-        console.error('Fetch error:', error);
+        console.error("Fetch error:", error);
       }
     }
-
-  }
+  };
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text >ShopKeeper Sign Up</Text>
-      <View>
-        <Text style={styles.textSmall}>Shop Name:</Text>
-        <TextInput
-          placeholder="Enter your shop name"
-          value={shopname}
-          onChangeText={(text) => setShopname(text)}
-          style={styles.textInput}
-        />
-      </View>
-      <View>
-        <Text style={styles.textSmall}>Owner Name:</Text>
-        <TextInput
-          placeholder="Enter your owner name"
-          value={ownername}
-          onChangeText={(text) => setOwnername(text)}
-          style={styles.textInput}
-        />
-      </View>
-      <View>
-        <Text style={styles.textSmall}>Email:</Text>
-        <TextInput
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={styles.textInput}
-        />
-      </View>
-      <View>
-        <Text style={styles.textSmall}>Phone:</Text>
-        <TextInput
-          placeholder="Phone Number"
-          value={phone}
-          onChangeText={(text) => setPhone(text)}
-          style={styles.textInput}
-        />
-      </View>
-      <View>
-        <Text style={styles.textSmall}>Password:</Text>
-        <TextInput
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          style={styles.textInput}
-          secureTextEntry
-        />
-      </View>
-      <View>
-        <Text style={styles.textSmall}>Confirm Password:</Text>
-        <TextInput
-          placeholder="Confirm password"
-          value={confPassword}
-          onChangeText={(text) => setConfPassword(text)}
-          style={styles.textInput}
-          secureTextEntry
-        />
-      </View>
+    <ScrollView style={{marginTop: 100}}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text style={{ fontSize: 32, fontWeight: "bold", marginBottom: 20 }}>
+          ShopKeeper Sign Up
+        </Text>
+        <View>
+          <Text style={styles.textSmall}>Shop Name:</Text>
+          <TextInput
+            placeholder="Enter your shop name"
+            value={shopname}
+            onChangeText={(text) => setShopname(text)}
+            style={styles.textInput}
+          />
+        </View>
+        <View>
+          <Text style={styles.textSmall}>Owner Name:</Text>
+          <TextInput
+            placeholder="Enter your owner name"
+            value={ownername}
+            onChangeText={(text) => setOwnername(text)}
+            style={styles.textInput}
+          />
+        </View>
+        <View>
+          <Text style={styles.textSmall}>Email:</Text>
+          <TextInput
+            placeholder="Enter your email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={styles.textInput}
+          />
+        </View>
+        <View>
+          <Text style={styles.textSmall}>Phone:</Text>
+          <TextInput
+            placeholder="Phone Number"
+            value={phone}
+            onChangeText={(text) => setPhone(text)}
+            style={styles.textInput}
+          />
+        </View>
+        <View>
+          <Text style={styles.textSmall}>Password:</Text>
+          <TextInput
+            placeholder="Enter your password"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            style={styles.textInput}
+            secureTextEntry
+          />
+        </View>
+        <View>
+          <Text style={styles.textSmall}>Confirm Password:</Text>
+          <TextInput
+            placeholder="Confirm password"
+            value={confPassword}
+            onChangeText={(text) => setConfPassword(text)}
+            style={styles.textInput}
+            secureTextEntry
+          />
+        </View>
 
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={next}
-      >
-        <Text style={styles.btnText}>Next</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.btn} onPress={next}>
+          <Text style={styles.btnText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -137,6 +135,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    marginTop: 100
   },
   radiocontainer: {
     flex: 1,
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   btn: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginTop: 30,
     paddingHorizontal: 100,
     paddingVertical: 15,
@@ -206,7 +205,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginLeft: 8,
   },
 });

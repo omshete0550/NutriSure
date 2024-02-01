@@ -32,7 +32,7 @@ const Stack = createStackNavigator();
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Report">
+            <Stack.Navigator initialRouteName="HomePage">
                 <Stack.Screen
                     name="ShopAdminLogin"
                     component={ShopAdminLogin}
@@ -139,7 +139,7 @@ export default function App() {
                         headerShown: false,
                     }}
                 />
-<Stack.Screen
+                <Stack.Screen
                     name="Receipe"
                     component={Receipe}
                     options={{

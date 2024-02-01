@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,63 +9,73 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { Video, ResizeMode } from "expo-av";
+import MapView from "react-native-maps";
+import { Marker } from "react-native-maps";
 
 const products = [
   {
     id: 1,
-    name: "Amul Milk",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-    price: 50,
-    image:
-      "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
+    name: "Lactose-Free Milk",
+    description:
+      "Milk that has been treated with lactase enzyme to break down lactose.",
+    price: 100,
+    image: "https://m.media-amazon.com/images/I/71VofBkeglL.jpg",
     isVeg: true,
     severity: "70%",
   },
   {
     id: 2,
-    name: "Choco Milk",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
+    name: "Mixed Grain Loaf",
+    description:
+      "Wheat free | No Added Preservatives | Lactose Free | Excellent source of Fiber (Pack of 1, 320Gm)",
     price: 50,
+    image: "https://m.media-amazon.com/images/I/71HwZ0TdgWL.jpg",
+    isVeg: true,
+    severity: "70%",
+  },
+  {
+    id: 3,
+    name: "Whipping Cream",
+    description: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
+    price: 500,
+    image:
+      "https://gourmet-foods.in/wp-content/uploads/2021/02/Whipping-Cream-35-Anchor.jpg",
+    isVeg: false,
+    severity: "70%",
+  },
+
+  {
+    id: 4,
+    name: "Amul Milk",
+    description:
+      "Cow's milk and other mammalian milks (goat, sheep, buffalo) contain lactose.",
+    price: 150,
     image:
       "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
     isVeg: false,
     severity: "70%",
   },
   {
-    id: 3,
-    name: "Amul Milk",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-    price: 50,
-    image:
-      "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
-    isVeg: true,
-    severity: "70%",
-  },
-  {
-    id: 4,
-    name: "Amul Milk",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
-    price: 50,
-    image:
-      "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
-    isVeg: true,
-    severity: "70%",
-  },
-  {
     id: 5,
-    name: "Amul Milk",
+    name: "Amul Butter",
     description: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
     price: 50,
-    image:
-      "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
-    isVeg: true,
+    image: "https://m.media-amazon.com/images/I/51KrxEKN58L.jpg",
+    isVeg: false,
     severity: "70%",
   },
 ];
 
 export default function SingleShopPage() {
   const navigation = useNavigation();
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  const [displayVideoMap, setDisplayVideoMap] = useState(true);
 
+  const handleToggleView = () => {
+    setDisplayVideoMap(!displayVideoMap);
+  };
   const handleAddToCart = (product) => {
     navigation.navigate("AddToCart", { products, selectedProduct: product });
   };
@@ -80,56 +90,93 @@ export default function SingleShopPage() {
         />
         <Text style={styles.text}>Big Bazaar</Text>
       </View>
-
-      {products.map((product) => (
-        <View key={product.id} style={styles.content}>
-          {/* Veg/Non-Veg logo */}
-          {product.isVeg ? (
-            <Ionicons
-              name="leaf"
-              size={20}
-              color="green"
-              style={styles.vegIcon}
-            />
-          ) : (
-            <Ionicons
-              name="skull"
-              size={20}
-              color="red"
-              style={styles.nonVegIcon}
-            />
-          )}
-
-          <Image source={{ uri: product.image }} style={styles.logoImage} />
-
-          <View style={styles.infoCont}>
-            <Text style={styles.text}>{product.name}</Text>
-            <Text style={{ marginBottom: 5 }}>{product.description}</Text>
-            <Text style={styles.price}>Price: ₹{product.price}</Text>
-            <View style={{flex: 1, flexDirection: "row"}}>
-              <TouchableOpacity
-                style={styles.Pbtn}
-                onPress={() => handleAddToCart(product)}
-              >
-                <Text style={styles.btnText}>Add</Text>
-                <Ionicons name="cart" size={18} color="#fff" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.Pbtn}
-                onPress={() => navigation.navigate("SingleProductPage")}
-              >
-                <Text style={styles.btnText}>View</Text>
-                {/* <Ionicons name="cart" size={20} color="#fff" /> */}
-              </TouchableOpacity>
-            </View>
-          </View>
+      <TouchableOpacity onPress={handleToggleView} style={styles.toggleButton}>
+        <Text style={styles.btnText}>
+          {displayVideoMap ? "Show Products" : "Show Video/Map"}
+        </Text>
+      </TouchableOpacity>
+      {displayVideoMap ? (
+        <View>
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: 19.076, // Mumbai's latitude
+              longitude: 72.8777, // Mumbai's longitude
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+          />
+          <Video
+            ref={video}
+            style={styles.video}
+            source={require("../assets/video.mp4")}
+            useNativeControls
+            resizeMode={ResizeMode.COVER}
+            isLooping
+            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+          />
         </View>
-      ))}
+      ) : (
+        <ScrollView>
+          {products.map((product) => (
+            <View key={product.id} style={styles.content}>
+              {/* Veg/Non-Veg logo */}
+              {product.isVeg ? (
+                <Ionicons
+                  name="leaf"
+                  size={20}
+                  color="green"
+                  style={styles.vegIcon}
+                />
+              ) : (
+                <Ionicons
+                  name="skull"
+                  size={20}
+                  color="red"
+                  style={styles.nonVegIcon}
+                />
+              )}
+
+              <Image source={{ uri: product.image }} style={styles.logoImage} />
+
+              <View style={styles.infoCont}>
+                <Text style={styles.text}>{product.name}</Text>
+                <Text style={{ marginBottom: 5 }}>{product.description}</Text>
+                <Text style={styles.price}>Price: ₹{product.price}</Text>
+                <View style={{ flex: 1, flexDirection: "row" }}>
+                  <TouchableOpacity
+                    style={styles.Pbtn}
+                    onPress={() => handleAddToCart(product)}
+                  >
+                    <Text style={styles.btnText}>Add</Text>
+                    <Ionicons name="cart" size={18} color="#fff" />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.Pbtn}
+                    onPress={() => navigation.navigate("SingleProductPage")}
+                  >
+                    <Text style={styles.btnText}>View</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      )}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  map: {
+    width: "100%",
+    height: "50%",
+    marginBottom: 20,
+  },
+  video: {
+    height: 300,
+    marginBottom: 20,
+  },
   container: {
     flex: 1,
     marginTop: 50,
@@ -181,7 +228,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 10,
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     width: 115,
     paddingHorizontal: 30,
     paddingVertical: 5,
@@ -204,5 +251,19 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: 0,
+  },
+  toggleButton: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: "rgb(110, 142, 251)",
+    width: 200,
+    marginBottom: 15,
+    paddingHorizontal: 30,
+    paddingVertical: 5,
+    borderRadius: 5,
+    marginRight: 10,
+    marginTop: 10,
   },
 });

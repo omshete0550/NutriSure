@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
 
 export default function Register({ navigation }) {
@@ -15,7 +15,7 @@ export default function Register({ navigation }) {
       alert("Check Password")
     }
     else {
-      const apiUrl = 'https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/signup';
+      const apiUrl = 'https://e3af-203-212-25-167.ngrok-free.app/signup';
 
       const postData = {
         fname: fname,
@@ -55,7 +55,7 @@ export default function Register({ navigation }) {
 
 
   return (
-    <View style={styles.Lcontainer}>
+    <ScrollView style={styles.Lcontainer}>
       <Text style={styles.textLarge}>User Sign Up</Text>
       <View>
         <Text style={styles.textSmall}>First Name:</Text>
@@ -121,7 +121,7 @@ export default function Register({ navigation }) {
       >
         <Text style={styles.btnText}>Sign Up</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -129,10 +129,9 @@ const styles = StyleSheet.create({
   Lcontainer: {
     flex: 1,
     backgroundColor: "#fff",
-    // justifyContent: "center",
     alignContent: "center",
     padding: 20,
-    paddingTop: 80
+    paddingTop: 80,
   },
   textSmall: {
     fontSize: 16,
@@ -176,14 +175,14 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   btn: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     paddingHorizontal: 70,
     paddingVertical: 12,
     borderRadius: 5,
     marginRight: 10,
   },
   btnN: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     paddingHorizontal: 70,
     paddingVertical: 12,
     borderRadius: 5,
@@ -212,7 +211,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginLeft: 8,
   },
 });

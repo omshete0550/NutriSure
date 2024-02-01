@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    borderColor: "#0484ac", // Outer circle color
+    borderColor: "rgb(110, 142, 251)", // Outer circle color
     borderWidth: 2,
     marginRight: 8,
     justifyContent: "center",
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: "#0484ac", // Inner circle color
+    backgroundColor: "rgb(110, 142, 251)", // Inner circle color
   },
 
   radioText: {

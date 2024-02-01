@@ -44,7 +44,7 @@ const dietaryRestrictions = ({ navigation }) => {
       ];
     }
 
-    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
+    const apiUrl = `https://e3af-203-212-25-167.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       diet_resctriction: newArray,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   btn: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     paddingHorizontal: 70,
     paddingVertical: 12,
     borderRadius: 5,

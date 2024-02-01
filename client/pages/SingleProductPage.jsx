@@ -29,7 +29,7 @@ export default function SingleProductPage() {
             <View style={styles.wrapperFigure}>
               <Image
                 source={{
-                  uri: "https://www.bigbasket.com/media/uploads/p/l/306926-2_4-amul-homogenised-toned-milk.jpg",
+                  uri: "https://m.media-amazon.com/images/I/71VofBkeglL.jpg",
                 }}
                 style={styles.wrapperImage}
                 resizeMode="cover"
@@ -37,7 +37,7 @@ export default function SingleProductPage() {
             </View>
             <View style={styles.wrapperContent}>
               <View style={styles.wrapperInform}>
-                <Text style={styles.badgeDarken}>Lactose Intolerance</Text>
+                {/* <Text style={styles.badgeDarken}>Lactose Intolerance</Text> */}
                 <Text style={styles.headingSm}>Amul Milk</Text>
                 <Text style={styles.textMd}>
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -49,7 +49,7 @@ export default function SingleProductPage() {
               <View style={styles.wrapperDetail}>
                 <View style={styles.price}>
                   <Text style={styles.textMdSemi}>Price:</Text>
-                  <Text style={styles.textXxlBold}>₹50.00</Text>
+                  <Text style={styles.textXxlBold}>₹100.00</Text>
                 </View>
                 <View style={styles.quantityContainer}>
                   <TouchableOpacity
@@ -126,11 +126,13 @@ const styles = StyleSheet.create({
   headingSm: {
     fontSize: 25,
     fontWeight: "bold",
+    marginTop: 30
   },
   textMd: {
     fontSize: 14,
     fontWeight: "normal",
     marginBottom: 10,
+  
   },
   wrapperDetail: {
     flexDirection: "row",
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   quantityButton: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 3,

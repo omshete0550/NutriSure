@@ -7,29 +7,29 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import ProgressBar from "react-native-progress/Bar";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const StepOne = ({ navigation }) => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [city, setCity] = useState("");
-  const [id,setId]=useState("")
+  const [id, setId] = useState("");
 
   const handleGenderChange = (selectedGender) => {
     setGender(selectedGender);
   };
-  useEffect(()=>{
+  useEffect(() => {
     getid();
-  },[])
-  const getid=async()=>{
-    setId(await AsyncStorage.getItem("id"))
-  }
+  }, []);
+  const getid = async () => {
+    setId(await AsyncStorage.getItem("id"));
+  };
   const next = async () => {
-  
-    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
+    const apiUrl = `https://e3af-203-212-25-167.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       age: age,
@@ -57,7 +57,7 @@ const StepOne = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.progreeBar}>
         <ProgressBar progress={0.167} width={375} />
       </View>
@@ -84,42 +84,47 @@ const StepOne = ({ navigation }) => {
             style={styles.textInput}
           />
 
-          <Text>Gender</Text>
-          <TouchableWithoutFeedback onPress={() => handleGenderChange("male")}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: "black",
-                  marginRight: 8,
-                  backgroundColor: gender === "male" ? "blue" : "transparent",
-                }}
-              />
-              <Text>Male</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          <Text style={styles.text}>Gender</Text>
+          <View style={{flexDirection: "row", gap: 40, padding: 20}}>
+            <TouchableWithoutFeedback
+              onPress={() => handleGenderChange("male")}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    width: 20,
+                    height: 20,
+                    borderRadius: 10,
+                    borderWidth: 1,
+                    borderColor: "black",
+                    marginRight: 8,
+                    backgroundColor: gender === "male" ? "blue" : "transparent",
+                  }}
+                />
+                <Text style={styles.textMd}>Male</Text>
+              </View>
+            </TouchableWithoutFeedback>
 
-          <TouchableWithoutFeedback
-            onPress={() => handleGenderChange("female")}
-          >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: "black",
-                  marginRight: 8,
-                  backgroundColor: gender === "female" ? "pink" : "transparent",
-                }}
-              />
-              <Text>Female</Text>
-            </View>
-          </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              onPress={() => handleGenderChange("female")}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    width: 20,
+                    height: 20,
+                    borderRadius: 10,
+                    borderWidth: 1,
+                    borderColor: "black",
+                    marginRight: 8,
+                    backgroundColor:
+                      gender === "female" ? "pink" : "transparent",
+                  }}
+                />
+                <Text style={styles.textMd}>Female</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
         </View>
         <View>
           <TouchableOpacity style={styles.btn} title="Next" onPress={next}>
@@ -127,7 +132,7 @@ const StepOne = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -147,6 +152,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  text: {
+    fontSize: 18,
+    marginTop: 20,
+    marginBottom: 10,
+    paddingHorizontal: 20,
+    fontWeight: "bold"
+  },
+  textMd: {
+    fontSize: 18,
+  },
   textInput: {
     borderWidth: 0.5,
     borderColor: "#d3d3d3",
@@ -162,7 +177,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   btn: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginTop: 30,
     paddingHorizontal: 100,
     paddingVertical: 15,

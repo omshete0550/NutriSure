@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import RadioButton from "../RadioButton/RadioButton";
@@ -32,7 +33,7 @@ const Severity = ({ navigation }) => {
   const next = async () => {
     const newArray = selectedOptions[0].value;
 
-    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
+    const apiUrl = `https://e3af-203-212-25-167.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       severity: newArray,
@@ -58,7 +59,7 @@ const Severity = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.progreeBar}>
         <ProgressBar progress={1} width={375} />
       </View>
@@ -107,7 +108,7 @@ const Severity = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   btn: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     paddingHorizontal: 70,
     paddingVertical: 12,
     borderRadius: 5,
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginLeft: 8,
   },
 });

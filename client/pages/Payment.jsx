@@ -4,16 +4,27 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Payment() {
+  const navigation = useNavigation();
+  const showToast = (message) => {
+    // Use Alert.alert for iOS
+    Alert.alert("", message);
+    navigation.navigate("HomePage");
+  };
+
+  const onPress = () => {
+    showToast("Payment Successful!");
+  };
+
   return (
     <View style={styles.cont}>
       <Text style={styles.text}>Payment</Text>
-      <Text style={styles.textSmall}>
-        Your Total Pay: ₹580
-      </Text>
+      <Text style={styles.textSmall}>Your Total Pay: ₹580</Text>
       <View style={styles.innerCont}>
         <TextInput
           placeholder="Flat, House no., Building, Company, Apartment"
@@ -46,11 +57,7 @@ export default function Payment() {
           style={styles.textInput}
         />
         <View>
-          <TouchableOpacity
-            style={styles.btn}
-            title="Next"
-            onPress={() => navigation.navigate("dietaryRestrictions")}
-          >
+          <TouchableOpacity style={styles.btn} title="Next" onPress={onPress}>
             <Text style={styles.btnText}>Pay</Text>
           </TouchableOpacity>
         </View>
@@ -92,7 +99,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   btn: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginTop: 30,
     paddingHorizontal: 100,
     paddingVertical: 15,

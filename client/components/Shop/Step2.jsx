@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import RadioButton from "../RadioButton/RadioButton";
-import * as ImagePicker from 'expo-image-picker'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as ImagePicker from "expo-image-picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Step2({ navigation }) {
   const [address, setAddress] = useState("");
@@ -28,7 +28,7 @@ export default function Step2({ navigation }) {
     { label: "Meat", value: "Meat" },
     { label: "SeaFood", value: "SeaFood" },
     { label: "Vegetables", value: "Vegetables" },
-    { label: "Fruits", value: "Fruits" }
+    { label: "Fruits", value: "Fruits" },
   ];
 
   const [image, setImage] = useState(null);
@@ -67,68 +67,61 @@ export default function Step2({ navigation }) {
     }
   };
 
-  const [id,setId]=useState("")
-  useEffect(()=>{
+  const [id, setId] = useState("");
+  useEffect(() => {
     getid();
-  },[])
-  const getid=async()=>{
-    setId(await AsyncStorage.getItem("shopid"))
-  }
+  }, []);
+  const getid = async () => {
+    setId(await AsyncStorage.getItem("shopid"));
+  };
 
-  console.log(id)
+  console.log(id);
 
   const next = async () => {
-
-    let newArray = []
+    let newArray = [];
 
     if (other) {
-      newArray = [
-        ...selectedOptions.map((item) => item.value),
-        other,
-      ];
-    }
-    else {
-      newArray = [
-        ...selectedOptions.map((item) => item.value)
-      ];
+      newArray = [...selectedOptions.map((item) => item.value), other];
+    } else {
+      newArray = [...selectedOptions.map((item) => item.value)];
     }
 
-    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/reshopsignup`;
+    const apiUrl = `https://e3af-203-212-25-167.ngrok-free.app/${id}/reshopsignup`;
 
     const postData = {
-      "address": address,
-      "city": city,
-      "certification": image,
-      "blueprint": blueprint,
-      "timing": timing,
-      "categories": newArray,
-      "gstin": gstin
+      address: address,
+      city: city,
+      certification: image,
+      blueprint: blueprint,
+      timing: timing,
+      categories: newArray,
+      gstin: gstin,
     };
 
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      navigation.navigate("ShopLogin")
-
+      navigation.navigate("ShopLogin");
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
     }
-  }
+  };
 
   return (
-    <ScrollView style={{ height: 500 }}>
-      <View >
+    <ScrollView style={{ height: 700, marginTop: 50, padding: 10 }}>
+      <View style={{flex: 1, justifyContent: "center", padding: 10}}>
+        <Text style={{fontSize: 32, fontWeight: "bold", textAlign: "center", marginBottom: 20}}>Step 2</Text>
         <View>
-          <Text style={styles.textSmall}>Address: ${id}</Text>
+          <Text style={styles.textSmall}>Address:</Text>
           <TextInput
             placeholder="Enter your address"
             value={address}
@@ -145,33 +138,28 @@ export default function Step2({ navigation }) {
             style={styles.textInput}
           />
         </View>
-        {/* <View>
-          <Text style={styles.textSmall}>Certificate:</Text>
-          <TextInput
-          placeholder="Enter your Certificate"
-          value={certificate}
-          onChangeText={(text) => setCertificate(text)}
-          style={styles.textInput}
-          />
-        </View> */}
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ marginTop: 10 }}>
           <Text style={styles.textSmall}>Certificate:</Text>
           <Button title="Pick an image from camera roll" onPress={pickImage} />
-          {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+          {image && (
+            <Image
+              source={{ uri: image }}
+              style={{ width: 200, height: 200 }}
+            />
+          )}
         </View>
-        {/* <View>
+        <View style={{ marginTop: 10 }}>
           <Text style={styles.textSmall}>Blueprint:</Text>
-          <TextInput
-            placeholder="Enter your Blueprint"
-            style={styles.textInput}
-            value={blueprint}
-            onChangeText={(text) => setBlueprint(text)}
+          <Button
+            title="Pick an image from camera roll"
+            onPress={pickBlueprint}
           />
-        </View> */}
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={styles.textSmall}>Blueprint:</Text>
-          <Button title="Pick an image from camera roll" onPress={pickBlueprint} />
-          {blueprint && <Image source={{ uri: blueprint }} style={{ width: 200, height: 200 }} />}
+          {blueprint && (
+            <Image
+              source={{ uri: blueprint }}
+              style={{ width: 200, height: 200 }}
+            />
+          )}
         </View>
         <View>
           <Text style={styles.textSmall}>Timing:</Text>
@@ -208,13 +196,13 @@ export default function Step2({ navigation }) {
             style={styles.textInput}
           />
         </View>
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.goBack()}>
-          <Text style={styles.btnText}>Back</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.btn}
-          onPress={next}
+          onPress={() => navigation.goBack()}
         >
+          <Text style={styles.btnText}>Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress={next}>
           <Text style={styles.btnText}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -229,12 +217,11 @@ const styles = StyleSheet.create({
   },
   radiocontainer: {
     flex: 1,
-    padding: 20,
   },
   textSmall: {
     fontSize: 16,
     fontWeight: 600,
-    paddingHorizontal: 20,
+    marginBottom: 10
   },
   text: {
     fontSize: 16,
@@ -258,7 +245,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 15,
     fontSize: 18,
-    margin: 10,
+    marginVertical: 10,
     width: 375,
     borderRadius: 10,
     shadowOffset: { width: -3, height: 4 },
@@ -267,11 +254,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   btn: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginTop: 30,
     paddingHorizontal: 100,
     paddingVertical: 15,
     borderRadius: 5,
+    width: 250,
   },
   btnText: {
     fontWeight: 600,
@@ -295,7 +283,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginLeft: 8,
   },
 });

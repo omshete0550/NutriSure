@@ -38,7 +38,7 @@ const Allergies = ({ navigation }) => {
       newArray = [...selectedOptions.map((item) => item.value)];
     }
 
-    const apiUrl = `https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/${id}/resignup`;
+    const apiUrl = `https://e3af-203-212-25-167.ngrok-free.app/${id}/resignup`;
 
     const postData = {
       allergy: newArray,
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   btn: {
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     paddingHorizontal: 70,
     paddingVertical: 12,
     borderRadius: 5,
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: "#0484ac",
+    backgroundColor: "rgb(110, 142, 251)",
     marginLeft: 8,
   },
 });
