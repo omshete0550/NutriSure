@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 const stores = [
-  { title: "Big Bazaar", image: require("../../assets/bigbazar.jpg") },
+  { title: "DMART", image: require("../../assets/bigbazar.jpg") },
   { title: "Walmart", image: require("../../assets/bigbazar.jpg") },
   { title: "Shop99", image: require("../../assets/bigbazar.jpg") },
 ];

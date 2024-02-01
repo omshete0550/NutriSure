@@ -84,11 +84,11 @@ export default function SingleShopPage() {
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Ionicons
-          name="menu"
-          size={30}
-          onPress={() => navigation.navigate("Step2")}
+          name="caret-back"
+          size={40}
+          onPress={() => navigation.navigate("HomePage")}
         />
-        <Text style={styles.text}>Big Bazaar</Text>
+        <Text style={styles.text}>DMART</Text>
       </View>
       <TouchableOpacity onPress={handleToggleView} style={styles.toggleButton}>
         <Text style={styles.btnText}>
@@ -99,13 +99,30 @@ export default function SingleShopPage() {
         <View>
           <MapView
             style={styles.map}
-            initialRegion={{
-              latitude: 19.076, // Mumbai's latitude
-              longitude: 72.8777, // Mumbai's longitude
+            // provider={PROVIDER_GOOGLE}
+            // showsUserLocation={true}
+            // customMapStyle={MapViewStyle}
+            region={{
+              latitude: 19.2572,
+              longitude: 72.8508,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
-          />
+          >
+            <Marker
+              coordinate={{
+                latitude: 19.2572,
+                longitude: 72.8508,
+              }}
+            >
+              <Image
+                source={{
+                  uri: "https://static.vecteezy.com/system/resources/thumbnails/017/178/337/small/location-map-marker-icon-symbol-on-transparent-background-free-png.png",
+                }}
+                style={{ width: 60, height: 60 }}
+              />
+            </Marker>
+          </MapView>
           <Video
             ref={video}
             style={styles.video}

@@ -28,12 +28,13 @@ import ProfileScreen from "./pages/ProfileScreen";
 import Receipe from "./pages/Receipe";
 import ReceipeFinal from "./pages/ReceipeFinal";
 import ScanResults from "./pages/ScanResults";
+import AddProduct from "./pages/AddProduct";
 const Stack = createStackNavigator();
 
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="HomePage">
+            <Stack.Navigator initialRouteName="Login">
                 <Stack.Screen
                     name="ShopAdminLogin"
                     component={ShopAdminLogin}
@@ -92,6 +93,11 @@ export default function App() {
                 <Stack.Screen
                     name="AddToCart"
                     component={AddToCart}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="AddProduct"
+                    component={AddProduct}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen

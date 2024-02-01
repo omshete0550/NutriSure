@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 const foods = [
-  { title: "Ghee", image: require("../../assets/ghee.jpg") },
+  { title: "Amul Milk", image: require("../../assets/amul.jpg") },
   { title: "Cheese", image: require("../../assets/cheese.jpg") },
   { title: "Ice Cream", image: require("../../assets/icecream.jpg") },
 ];

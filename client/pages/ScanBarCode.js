@@ -43,7 +43,7 @@ function ScanBarCode({ navigation }) {
         if (json.status_verbose === 'product found'){
          alert(json);
          //  saveProduct(json.product._id, json)
-          navigation.navigate('Product',
+          navigation.navigate('ScanResults',
           {
             item: json.product
           })

@@ -95,14 +95,15 @@ const Severity = ({ navigation }) => {
               </View>
             </View>
             <View style={{ flexDirection: "row", marginTop: 20 }}>
-              <TouchableOpacity style={styles.btn} onPress={next}>
-                <Text style={styles.btnText}>Submit</Text>
-              </TouchableOpacity>
+             
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => navigation.goBack()}
               >
                 <Text style={styles.btnText}>Back</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn} onPress={next}>
+                <Text style={styles.btnText}>Submit</Text>
               </TouchableOpacity>
             </View>
           </View>

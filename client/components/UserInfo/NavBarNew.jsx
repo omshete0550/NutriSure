@@ -1,15 +1,25 @@
-import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'; // Assuming you're using React Navigation for navigation
+import React from "react";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Animated,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native"; // Assuming you're using React Navigation for navigation
 
 const NavBarNew = () => {
   const navigation = useNavigation();
   const icons = [
-    { name: 'home', label: 'Home', screen: 'HomePage' },
-    { name: 'chatbubble-ellipses', label: 'Community', screen: 'CommunityScreen' },
-    { name: 'person-circle', label: 'Profile', screen: 'ProfileScreen' },
-    { name: 'restaurant', label: 'Recipe', screen: 'Receipe' },
+    { name: "home", label: "Home", screen: "HomePage" },
+    {
+      name: "chatbubble-ellipses",
+      label: "Community",
+      screen: "CommunityScreen",
+    },
+    { name: "person-circle", label: "Profile", screen: "ProfileScreen" },
+    { name: "restaurant", label: "Recipe", screen: "Receipe" },
   ];
   const animatedValues = icons.map(() => new Animated.Value(0));
 
@@ -73,12 +83,11 @@ const NavBarNew = () => {
       </View>
       {/* Barcode icon */}
       <TouchableOpacity
-  style={styles.barcodeIconContainer}
-  onPress={() => navigateToScreen('ScanResults')}
->
-  <Ionicons name="barcode" size={30} style={styles.barcodeIcon} />
-</TouchableOpacity>
-
+        style={styles.barcodeIconContainer}
+        onPress={() => navigation.navigate("ScanBarCode")}
+      >
+        <Ionicons name="barcode" size={30} style={styles.barcodeIcon} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -87,41 +96,41 @@ const styles = StyleSheet.create({
   navigationBar: {
     backgroundColor: "#4A66E3",
     padding: 7,
-    position: 'relative', // Ensure relative positioning for containing absolute positioned elements
+    position: "relative", // Ensure relative positioning for containing absolute positioned elements
   },
   navIconsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
   touchable: {
     // borderRadius: 20,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   navIcon: {
     marginBottom: 5,
-    color: 'white',
+    color: "white",
   },
   navIconWrapper: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   navLabel: {
     fontSize: 15,
-    color: 'white',
+    color: "white",
   },
-barcodeIconContainer: {
-    position: 'absolute',
+  barcodeIconContainer: {
+    position: "absolute",
     bottom: 58, // Adjust as needed
-    left: '52%', // Center horizontally
+    left: "52%", // Center horizontally
     transform: [{ translateX: -25 }], // Half the width of the circle container
     width: 55,
     height: 55,
     borderRadius: 25, // Half the width and height to make it circular
-    backgroundColor: '#4A66E3', // Blue color
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000', // Shadow color
+    backgroundColor: "#4A66E3", // Blue color
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000", // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.3, // Shadow opacity
     shadowRadius: 3, // Shadow radius
@@ -129,9 +138,8 @@ barcodeIconContainer: {
   },
 
   barcodeIcon: {
-    color: 'white', // Icon color
+    color: "white", // Icon color
   },
-
 });
 
 export default NavBarNew;

@@ -8,10 +8,10 @@ const { height: screenHeight } = Dimensions.get('window');
 
 // Sample array of cards
 const cards = [
-  { name: 'User 1', postImage: require('../assets/cheese.jpg'), text: 'Card 1' },
-  { name: 'User 2', postImage: require('../assets/ghee.jpg'), text: 'Card 2' },
-  { name: 'User 3', postImage: require('../assets/icecream.jpg'), text: 'Card 3' },
-  { name: 'User 4', postImage: require('../assets/walmart.jpg'), text: 'Card 4' }
+  { name: 'Om', postImage: require('../assets/cheese.jpg'), text: 'It contained fungus and smelled foul.' },
+  { name: 'Altaf', postImage: require('../assets/ghee.jpg'), text: 'Best ghee for lactose intelorance' },
+  { name: 'Sai', postImage: require('../assets/icecream.jpg'), text: 'Card 3' },
+  { name: 'Sarah', postImage: require('../assets/walmart.jpg'), text: 'Card 4' }
 ];
 
 const Card = ({ card }) => (
@@ -62,6 +62,7 @@ const CommunityScreen = () => {
   return (
     <View style={styles.screenContainer}>
       <ScrollView contentContainerStyle={{ height: 500 }}>
+        <Text style={{fontSize: 32, fontWeight: "bold", textAlign: "center", marginBottom: 20}}>Community Forum</Text>
         {/* Post input */}
         <View style={styles.postInputContainer}>
           <TextInput
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 20,
-    paddingTop: 350,
+    paddingTop: 200,
   },
   card: {
     width: 300,

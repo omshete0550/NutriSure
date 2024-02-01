@@ -12,8 +12,10 @@ import NavBarNew from "../components/UserInfo/NavBarNew";
 const Receipe = () => {
   const [ingredients, setIngredients] = useState(["", "", "", "", ""]);
   const navigation = useNavigation();
+  const [loading,setLoading]=useState(0)
 
   const submit = async () => {
+    setLoading(1)
     const combinedString = ingredients.filter(Boolean).join(", ");
 
     const postData = {
@@ -42,6 +44,8 @@ const Receipe = () => {
       // await AsyncStorage.setItem("id", data.id.toString());
 
       // Navigate to 'ReceipeFinal' with the generated recipe data
+      setIngredients(["", "", "", "", ""])
+      setLoading(0)
       navigation.navigate("ReceipeFinal", {
         title: data.title,
         ingredients: data.ingredients,
@@ -74,7 +78,7 @@ const Receipe = () => {
         ))}
 
         <TouchableOpacity style={styles.btn} onPress={submit}>
-          <Text style={styles.btnText}>Submit</Text>
+          <Text style={styles.btnText}>{loading?"Loading..":"Submit"}</Text>
         </TouchableOpacity>
       </View>
       <NavBarNew />

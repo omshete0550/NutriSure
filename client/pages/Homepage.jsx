@@ -83,15 +83,6 @@ const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
           </TouchableOpacity>
         </LinearGradient>
         <View style={styles.recommendedFoodSection}>
-          <Text style={styles.recommendedFoodTitle}>Recommended Food</Text>
-          <TouchableOpacity style={styles.exploreMoreButton}>
-            <Text style={styles.exploreMoreButtonText}>Explore More</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.recommendedFoodContainer}>
-          <FoodCard />
-        </View>
-        <View style={styles.recommendedFoodSection}>
           <Text style={styles.recommendedFoodTitle}>Recommended Stores</Text>
           <TouchableOpacity style={styles.exploreMoreButton}>
             <Text style={styles.exploreMoreButtonText}>Explore More</Text>
@@ -99,6 +90,15 @@ const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
         </View>
         <View style={styles.recommendedFoodContainer}>
           <StoreCard />
+        </View>
+        <View style={styles.recommendedFoodSection}>
+          <Text style={styles.recommendedFoodTitle}>Recommended Food</Text>
+          <TouchableOpacity style={styles.exploreMoreButton}>
+            <Text style={styles.exploreMoreButtonText}>Explore More</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.recommendedFoodContainer}>
+          <FoodCard />
         </View>
       </ScrollView>
       <Animated.View style={[styles.menuBar, { left: slideMenuAnimation }]}>
@@ -116,9 +116,9 @@ const Homepage = ({ user = { name: "Sarah" }, location = "Mumbai" }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
-          onPress={() => handleMenuItemPress("Settings")}
+          onPress={() => navigation.navigate("Login")}
         >
-          <Text style={styles.menuItemText}>Settings</Text>
+          <Text style={styles.menuItemText}>Logout</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.closeIcon} onPress={toggleMenu}>
           <Ionicons name="close" size={24} color="black" />

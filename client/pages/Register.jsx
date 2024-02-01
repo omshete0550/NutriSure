@@ -1,4 +1,12 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+} from "react-native";
 import React, { useState } from "react";
 
 export default function Register({ navigation }) {
@@ -10,28 +18,26 @@ export default function Register({ navigation }) {
   const [conPass, setConPass] = useState("");
 
   const signup = async () => {
-
     if (conPass !== password) {
-      alert("Check Password")
-    }
-    else {
-      const apiUrl = 'https://e3af-203-212-25-167.ngrok-free.app/signup';
+      alert("Check Password");
+    } else {
+      const apiUrl = "https://e3af-203-212-25-167.ngrok-free.app/signup";
 
       const postData = {
         fname: fname,
         lname: lname,
         email: email,
         phone: phone,
-        password: password
+        password: password,
       };
 
       try {
         const response = await fetch(apiUrl, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         });
 
         if (!response.ok) {
@@ -39,23 +45,26 @@ export default function Register({ navigation }) {
         }
         const data = await response.json();
 
-        console.log('Data received:', data);
+        console.log("Data received:", data);
         if (data.status === "Success") {
-          navigation.navigate('Login');
-        }
-        else {
-          navigation.navigate('Register');
+          navigation.navigate("Login");
+        } else {
+          navigation.navigate("Register");
         }
       } catch (error) {
-        console.error('Fetch error:', error);
+        console.error("Fetch error:", error);
       }
     }
-
   };
-
 
   return (
     <ScrollView style={styles.Lcontainer}>
+      {/* <View style={{justifyContent: "center", alignItems: "center", marginBottom: 50}}>
+          <Image
+            source={require("../assets/logo.png")}
+            style={{ width: 100, height: 100, aspectRatio: "3/2" }}
+          />
+        </View> */}
       <Text style={styles.textLarge}>User Sign Up</Text>
       <View>
         <Text style={styles.textSmall}>First Name:</Text>
@@ -115,10 +124,7 @@ export default function Register({ navigation }) {
           secureTextEntry
         />
       </View>
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={signup}
-      >
+      <TouchableOpacity style={styles.btn} onPress={signup}>
         <Text style={styles.btnText}>Sign Up</Text>
       </TouchableOpacity>
     </ScrollView>

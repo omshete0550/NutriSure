@@ -1,15 +1,18 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import React from "react";
+import * as Speech from "expo-speech";
 
 export default function ReceipeFinal({ route }) {
   // Extracting data passed through navigation
   const { title, ingredients, directions } = route.params;
-
+  const speakk = () => {
+    const final = `Food Title : ${title}, Ingredients : ${ingredients}, Process to make food :${directions}`;
+    Speech.speak(final);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Here's your recipe</Text>
 
-      <Text style={styles.texttitle}>{title}</Text>
       <Text style={styles.texttitle}>{title}</Text>
 
       <Text style={styles.texting}>Ingredients :</Text>
@@ -25,6 +28,8 @@ export default function ReceipeFinal({ route }) {
           {direction}
         </Text>
       ))}
+
+      <Button title="voice" onPress={speakk} />
     </View>
   );
 }

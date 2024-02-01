@@ -4,9 +4,10 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -36,7 +37,7 @@ export default function Login({ navigation }) {
 
       console.log("Data received:", data);
       if (data.status === "userFound") {
-        await AsyncStorage.setItem("id", (data.id));
+        await AsyncStorage.setItem("id", data.id);
         navigation.navigate("BasicInfo");
       } else {
         navigation.navigate("Login");
@@ -49,6 +50,12 @@ export default function Login({ navigation }) {
   return (
     <View style={styles.Lcontainer}>
       <View>
+        <View style={{justifyContent: "center", alignItems: "center", marginBottom: 50}}>
+          <Image
+            source={require("../assets/logo.png")}
+            style={{ width: 100, height: 100, aspectRatio: "3/2" }}
+          />
+        </View>
         <Text style={styles.textLarge}>User Login</Text>
         <Text style={styles.textSmall}>Email:</Text>
         <TextInput
@@ -72,7 +79,12 @@ export default function Login({ navigation }) {
       <TouchableOpacity style={styles.btn} onPress={login}>
         <Text style={styles.btnText}>Sign In</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate('Sign Up')}}>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => {
+          navigation.navigate("Sign Up");
+        }}
+      >
         <Text style={styles.btnText}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
     </View>
@@ -135,6 +147,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 5,
     marginRight: 10,
+    marginTop: 10,
   },
   btnN: {
     backgroundColor: "rgb(110, 142, 251)",

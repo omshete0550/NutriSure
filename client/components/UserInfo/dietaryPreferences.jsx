@@ -96,17 +96,18 @@ const dietaryPreferences = ({ navigation }) => {
               />
             </View>
             <View style={{ flexDirection: "row", marginTop: 20 }}>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={next}
-              >
-                <Text style={styles.btnText}>Next</Text>
-              </TouchableOpacity>
+              
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => navigation.goBack()}
               >
                 <Text style={styles.btnText}>Back</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={next}
+              >
+                <Text style={styles.btnText}>Next</Text>
               </TouchableOpacity>
             </View>
           </View>
