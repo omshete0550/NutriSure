@@ -24,7 +24,7 @@ const Receipe = () => {
     try {
       // Replace with the correct API endpoint for your Flask backend
       const apiUrl =
-        "https://d356-203-212-25-167.ngrok-free.app/generate_recipe";
+        "https://cb82-203-212-25-167.ngrok-free.app/generate_recipe";
 
       const response = await fetch(apiUrl, {
         method: "POST",
