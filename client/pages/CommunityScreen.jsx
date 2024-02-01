@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, Dimensions, ScrollView, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Dimensions, ScrollView, Image, StyleSheet, TextInput, TouchableOpacity, Button } from 'react-native';
 import Navbar from '../components/UserInfo/NavBarNew';
 import NavBarNew from '../components/UserInfo/NavBarNew';
+import * as ImagePicker from 'expo-image-picker'
 
 const { height: screenHeight } = Dimensions.get('window');
 
 // Sample array of cards
 const cards = [
   { name: 'User 1', postImage: require('../assets/cheese.jpg'), text: 'Card 1' },
-  { name: 'User 2', postImage: require('../assets/cheese.jpg'), text: 'cheese per' },
-  { name: 'User 3', postImage: require('../assets/cheese.jpg'), text: 'Card 3' },
-  { name: 'User 4', postImage: require('../assets/cheese.jpg'), text: 'Card 4' },
-  { name: 'User 5', postImage: require('../assets/cheese.jpg'), text: 'Card 5' },
-  { name: 'User 6', postImage: require('../assets/cheese.jpg'), text: 'Card 6' },
+  { name: 'User 2', postImage: require('../assets/ghee.jpg'), text: 'Card 2' },
+  { name: 'User 3', postImage: require('../assets/icecream.jpg'), text: 'Card 3' },
+  { name: 'User 4', postImage: require('../assets/walmart.jpg'), text: 'Card 4' }
 ];
 
 const Card = ({ card }) => (
@@ -37,15 +36,32 @@ const CommunityScreen = () => {
   const [postText, setPostText] = useState('');
 
   const handlePost = () => {
-    // Handle posting logic here, e.g., sending postText and selected media to server
     console.log('Posted:', postText);
-    // Reset postText after posting
     setPostText('');
+    setImage(null)
+  };
+
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
   };
 
   return (
     <View style={styles.screenContainer}>
-      <ScrollView contentContainerStyle={{ height:500 }}>
+      <ScrollView contentContainerStyle={{ height: 500 }}>
         {/* Post input */}
         <View style={styles.postInputContainer}>
           <TextInput
@@ -55,10 +71,15 @@ const CommunityScreen = () => {
             value={postText}
             onChangeText={setPostText}
           />
-          {/* Add media button */}
           <TouchableOpacity onPress={handlePost} style={styles.postButton}>
             <Text style={styles.postButtonText}>Post</Text>
           </TouchableOpacity>
+        </View>
+        <View style={styles.postInputContainer}>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Button title="Pick an image from camera roll" onPress={pickImage} />
+            {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+          </View>
         </View>
         <CardContainer />
       </ScrollView>
@@ -72,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingTop: 80,
-    
+
   },
   cardContainer: {
     flexGrow: 1,

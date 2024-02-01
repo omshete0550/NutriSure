@@ -33,11 +33,11 @@ const Stack = createStackNavigator();
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="AddProduct" >
-            <Stack.Screen name="Receipe" component={Receipe} options={{ headerShown: false }} />
-            <Stack.Screen name="AddProduct" component={AddProduct} options={{ headerShown: false }} />
-            <Stack.Screen name="ReceipeFinal" component={ReceipeFinal} options={{ headerShown: false }} />
-                {/* <Stack.Screen name="ShopAdminLogin" component={ShopAdminLogin} options={{ headerShown: false }} />
+            <Stack.Navigator initialRouteName="CommunityScreen" >
+                <Stack.Screen name="Receipe" component={Receipe} options={{ headerShown: false }} />
+                <Stack.Screen name="AddProduct" component={AddProduct} options={{ headerShown: false }} />
+                <Stack.Screen name="ReceipeFinal" component={ReceipeFinal} options={{ headerShown: false }} />
+                <Stack.Screen name="ShopAdminLogin" component={ShopAdminLogin} options={{ headerShown: false }} />
                 <Stack.Screen name="ShopLogin" component={ShopLogin} options={{ headerShown: false }} />
                 <Stack.Screen name="Step1" component={Step1} options={{ headerShown: false }} />
                 <Stack.Screen name="Step2" component={Step2} options={{ headerShown: false }} />
@@ -50,9 +50,9 @@ export default function App() {
                 <Stack.Screen name="AddToCart" component={AddToCart} options={{ headerShown: false }} />
                 <Stack.Screen name="payment" component={Payment} options={{ headerShown: false }} />
                 <Stack.Screen name="SingleProductPage" component={SingleProductPage} options={{ headerShown: false }} />
-                <Stack.Screen name="Sign Up" component={Register} options={{ headerShown: false }} /> */}
+                <Stack.Screen name="Sign Up" component={Register} options={{ headerShown: false }} />
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-                {/* <Stack.Screen name="SingleShopPage" component={SingleShopPage} options={{ headerShown: false }} />
+                <Stack.Screen name="SingleShopPage" component={SingleShopPage} options={{ headerShown: false }} />
                 <Stack.Screen name="HomePage" component={Homepage} options={{ headerShown: false }} />
                 <Stack.Screen
                     name="CommunityScreen"
@@ -74,7 +74,7 @@ export default function App() {
                     options={{
                         headerShown: false,
                     }}
-                /> */}
+                />
             </Stack.Navigator>
             <StatusBar style="auto" />
         </NavigationContainer>
