@@ -27,6 +27,7 @@ import ShopLogin from "./pages/ShopLogin";
 import ProfileScreen from "./pages/ProfileScreen";
 import Receipe from "./pages/Receipe";
 import ReceipeFinal from "./pages/ReceipeFinal";
+import ScanResults from "./pages/ScanResults";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -36,6 +37,11 @@ export default function App() {
                 <Stack.Screen
                     name="ShopAdminLogin"
                     component={ShopAdminLogin}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="ScanResults"
+                    component={ScanResults}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen

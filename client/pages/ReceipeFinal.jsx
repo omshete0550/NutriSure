@@ -8,7 +8,15 @@ export default function ReceipeFinal({ route }) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Here's your recipe</Text>
+export default function ReceipeFinal({ route }) {
+  // Extracting data passed through navigation
+  const { title, ingredients, directions } = route.params;
 
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Here's your recipe</Text>
+
+      <Text style={styles.texttitle}>{title}</Text>
       <Text style={styles.texttitle}>{title}</Text>
 
       <Text style={styles.texting}>Ingredients :</Text>

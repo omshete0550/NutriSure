@@ -18,19 +18,38 @@ const Report = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log('Submit button pressed');
+  const handleSubmit = async () => {
     if (storeName.trim() === '' || productName.trim() === '' || productIssues.length === 0) {
-           
-           window.alert('Please fill out all fields and select at least one product issue.');
-
+      Alert.alert('Please fill out all fields and select at least one product issue.');
     } else {
-      // Perform submission logic (e.g., send report to server)
-     window.alert('Your report has been submitted. We will get back to you shortly.');
+      try {
+        const apiUrl = 'https://d897-2401-4900-56fe-3934-6dd1-d3bf-f33e-305.ngrok-free.app/postreport';  // Replace with your Flask API address
 
-      setStoreName('');
-      setProductName('');
-      setProductIssues([]);
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            storeName,
+            productName,
+            productIssues,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        Alert.alert('Your report has been submitted. We will get back to you shortly.');
+
+        setStoreName('');
+        setProductName('');
+        setProductIssues([]);
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
     }
   };
 
