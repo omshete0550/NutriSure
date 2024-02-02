@@ -58,6 +58,7 @@ The architecture and workflow was built using smartdraw.
 
 ## Demonstration
 
+https://github.com/omshete0550/NutriSure/assets/95119784/508092a4-0013-4af8-a717-a4b0c9f2d7a6
 
 <br />
 
