@@ -28,7 +28,6 @@
 - [Demonstration & Features](#demonstration)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
-<!-- - [License](#license) -->
 - [Authors](#authors)
 
 ## About The Project
@@ -58,7 +57,6 @@ The architecture and workflow was built using smartdraw.
 <img src="./client/assets/architecture.jpg" alt="architecture">
 
 ## Demonstration
-
 
 
 <br />
@@ -125,7 +123,6 @@ Pages
 ```
 
 <br />
-<br />
 
 **Server**
 
@@ -140,7 +137,6 @@ backend
 └───requirements.txt
 ```
 
-<br />
 <br />
 
 ## Authors
