@@ -86,7 +86,7 @@ export default function Step2({ navigation }) {
       newArray = [...selectedOptions.map((item) => item.value)];
     }
 
-    const apiUrl = `https://e3af-203-212-25-167.ngrok-free.app/${id}/reshopsignup`;
+    const apiUrl = `https://ce2e-103-184-126-47.ngrok-free.app/${id}/reshopsignup`;
 
     const postData = {
       address: address,

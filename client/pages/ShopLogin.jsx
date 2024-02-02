@@ -13,7 +13,7 @@ export default function ShopLogin({ navigation }) {
   const [password, setPassword] = useState("");
 
   const login = async () => {
-    const apiUrl = "https://e3af-203-212-25-167.ngrok-free.app/shoplogin";
+    const apiUrl = "https://ce2e-103-184-126-47.ngrok-free.app/shoplogin";
 
     const postData = {
       email: email,

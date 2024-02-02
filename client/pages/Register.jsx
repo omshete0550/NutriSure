@@ -21,7 +21,7 @@ export default function Register({ navigation }) {
     if (conPass !== password) {
       alert("Check Password");
     } else {
-      const apiUrl = "https://e3af-203-212-25-167.ngrok-free.app/signup";
+      const apiUrl = "https://ce2e-103-184-126-47.ngrok-free.app/signup";
 
       const postData = {
         fname: fname,
